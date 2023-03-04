@@ -1,0 +1,27 @@
+{
+  "name": "stsweng-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yeonnmi/STSWENG7.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yeonnmi/STSWENG7/issues"
+  },
+  "type": "module",
+  "homepage": "https://github.com/Yeonnmi/STSWENG7#readme",
+  "dependencies": {
+    "dotenv": "^9.0.1",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "mongoose": "^6.3.6"
+  }
+}
