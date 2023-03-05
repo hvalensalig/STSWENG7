@@ -8,5 +8,7 @@ router.get(`/`, controller.getHome);
 router.get(`/getCheckRefNo`, controller.getCheckRefNo);
 router.post(`/add`, controller.getAdd);
 router.post(`/delete`, controller.getDelete);
+router.post(`/register`, controller.getRegister);
+router.post(`/login`, controller.getLogin);
 
 export default router;

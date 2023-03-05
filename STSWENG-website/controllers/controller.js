@@ -47,6 +47,14 @@ const controller = {
     */
     getDelete: function (req, res) {
         // your code here
+    },
+
+    getRegister: function (req, res) {
+        res.render('login')
+    },
+
+    getLogin: function (req, res) {
+        res.render('register')
     }
 
 }
