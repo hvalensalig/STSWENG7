@@ -15,7 +15,7 @@ const controller = {
     */
     getHome: function(req, res) {
         // your code here
-        res.render('home'); // This is to load the page initially. You are expected to eventually replace this with your own code.
+        res.render('register'); // This is to load the page initially. You are expected to eventually replace this with your own code.
     },
 
     /*
