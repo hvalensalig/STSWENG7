@@ -13,9 +13,9 @@ const controller = {
             request to path `/`. This displays `index.hbs` with all
             transactions currently stored in the database.
     */
-    getIndex: function(req, res) {
+    getHome: function(req, res) {
         // your code here
-        res.render('index'); // This is to load the page initially. You are expected to eventually replace this with your own code.
+        res.render('home'); // This is to load the page initially. You are expected to eventually replace this with your own code.
     },
 
     /*
