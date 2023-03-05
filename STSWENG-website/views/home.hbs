@@ -1,0 +1,29 @@
+<div id="container">
+    {{>sidebar}}
+    <div id="content">
+        <div id="info-container">
+            <div id="username"> Username: {{username}}</div>
+            <div id="name"> Name: {{Name}} </div>
+            <div id="location"> Location: {{Location}} </div>
+            <button id="edit-btn">Edit Profile Details</button>
+        </div>
+        <div id="recipe-list-container">
+            <div id="recipe-list-name"> List of Recipes:</div>
+            <div id="recipe-list">
+                {{#each this}}
+                    {{#if name}}
+                        {{>recipe}}
+                    {{/if}}
+                {{/each}} </div>
+
+        </div>
+
+        <!--
+            TODO: Display all transactions here. Each transaction should be retrieved from the database and displayed through rendering `../partials/card.hbs`.
+        -->
+        <div id="cards">
+            <!-- your code here -->
+
+        </div>
+    </div>
+</div>
