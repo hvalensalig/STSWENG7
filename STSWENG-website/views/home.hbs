@@ -10,19 +10,13 @@
         <div id="recipe-list-container">
             <div id="recipe-list-name"> List of Recipes:</div>
             <div id="recipe-list">
+                {{>recipe}}
+    
                 {{#each this}}
                     {{#if name}}
                         {{>recipe}}
                     {{/if}}
                 {{/each}} </div>
-
-        </div>
-
-        <!--
-            TODO: Display all transactions here. Each transaction should be retrieved from the database and displayed through rendering `../partials/card.hbs`.
-        -->
-        <div id="cards">
-            <!-- your code here -->
 
         </div>
     </div>

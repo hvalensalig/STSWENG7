@@ -21,13 +21,15 @@ body {
 }
 
 .sidebar-container {
+    text-align: center;
+    max-height: calc(100vh - 9rem);
     display: flex;
     position: relative;
+    
 }
 
 .sidebar-container .sidebar {
     width: 300px;
-    height: 100%;
     background: var(--sidebar-color);
     padding: 30px 0px;
 }
@@ -35,7 +37,6 @@ body {
 .sidebar-container .sidebar h2 {
     color: var(--sidebar-text);
     text-transform: uppercase;
-    text-align: center;
     margin-bottom: 30px;
 }
 
@@ -50,11 +51,14 @@ body {
     font-size: 30px;
     color: var(--sidebar-text);
     display: block;
-    text-align: center;
 }
 
-#logout {
-    margin-top: 200%;
+#logout{
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    padding-left: 100px;
+    padding-right: 103.55px;
 }
 
 .sidebar-container .sidebar ul li:hover {
@@ -78,20 +82,54 @@ body {
     margin-top: 20px;
 }
 
-#username , #name, #location{
+#username,
+#name,
+#location {
     font-size: 50px;
     padding: 2px;
 }
-#edit-btn{
+
+#edit-btn {
     font-size: 25px;
     margin: 2px;
     margin-left: 10px;
     padding: 2px;
 }
-#recipe-list-name{
+
+#recipe-list-name {
     font-size: 30px;
     padding: 25px;
     margin-top: 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-left: 30px;
+}
+
+#food-pic {
+    width: 200px;
+    min-height: 120px;
+    max-height: auto;
+    margin: 3px;
+    padding: 3px;
+    display: flex;
+}
+
+#info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#food-name {
+    flex-grow: 1;
+}
+
+.text {
+    font-size: 50px;
+    padding-left: 50px;
 }
 
 /* Register/Login Page - Start */
