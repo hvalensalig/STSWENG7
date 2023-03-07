@@ -31,7 +31,7 @@ body {
 .sidebar-container .sidebar {
     width: 300px;
     background: var(--sidebar-color);
-    padding: 30px 0px;
+    padding: 0px 0px;
 }
 
 .sidebar-container .sidebar h2 {
@@ -67,4 +67,5 @@ body {
 
 .sidebar-container .sidebar ul li:hover a {
     color: var(--sidebar-highlight);
+    cursor: pointer;
 }

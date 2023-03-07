@@ -1,5 +1,5 @@
 import db from '../models/db.js';
-import Transaction from '../models/TransactionModel.js';
+import Recipe from '../models/RecipeModel.js';
 
 const controller = {
 
@@ -7,43 +7,47 @@ const controller = {
     getFavicon: function (req, res) {
         res.status(204);
     },
-
-    /*
-    TODO:   This function is executed when the client sends an HTTP GET
-            request to path `/`. This displays `index.hbs` with all
-            transactions currently stored in the database.
-    */
     getStart: function (req, res) {
-        // your code here
-        res.render('register'); // This is to load the page initially. You are expected to eventually replace this with your own code.
+        res.render('login'); 
     },
 
     getHome: function (req, res) {
-        // your code here
-        res.render('home'); // This is to load the page initially. You are expected to eventually replace this with your own code.
+        res.render('home'); 
     },
 
     getSearch: function (req, res) {
-        // your code here
-        res.render('search'); // This is to load the page initially. You are expected to eventually replace this with your own code.
+        res.render('search'); 
     },
 
     getAddRecipe: function (req, res) {
-        // your code here
-        res.render('addRecipe'); // This is to load the page initially. You are expected to eventually replace this with your own code.
+
+        res.render('addRecipe'); 
+    },
+
+    postAddRecipe: function (req, res) {
+
+        res.redirect('home'); 
     },
 
     getRegister: function (req, res) {
-        res.redirect('/login')
+        res.render('register');
+    },
+
+    postRegister: function(req,res){
+        res.redirect('/login');
     },
 
     getLogin: function (req, res) {
-        res.render('login')
+        res.render('login');
+    },
+
+    postLogin: function(req,res){
+        res.redirect('/home');
     },
 
     getLogout: function (req, res) {
-        res.redirect('/login')
-    }
+        res.redirect('/login');
+    },
 
 }
 

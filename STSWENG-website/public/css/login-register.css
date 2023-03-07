@@ -1,137 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 
-:root {
-    --sidebar-color: #f8f8f8;
-    --sidebar-text: #000000;
-    --sidebar-hover: #4a89ff;
-    --sidebar-highlight: #ffff;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style: none;
-    text-decoration: none;
-    font-family: 'Josefin Sans', sans-serif;
-}
-
-body {
-    background-color: var(--sidebar-highlight);
-}
-
-.sidebar-container {
-    text-align: center;
-    max-height: calc(100vh - 9rem);
-    display: flex;
-    position: relative;
-    
-}
-
-.sidebar-container .sidebar {
-    width: 300px;
-    background: var(--sidebar-color);
-    padding: 30px 0px;
-}
-
-.sidebar-container .sidebar h2 {
-    color: var(--sidebar-text);
-    text-transform: uppercase;
-    margin-bottom: 30px;
-}
-
-.sidebar-container .sidebar ul li {
-    padding: 15px;
-    border-bottom: 1px solid var(--sidebar-text);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.sidebar-container .sidebar ul li a {
-    font-size: 30px;
-    color: var(--sidebar-text);
-    display: block;
-}
-
-#logout{
-    display: block;
-    position: absolute;
-    bottom: 0px;
-    padding-left: 100px;
-    padding-right: 103.55px;
-}
-
-.sidebar-container .sidebar ul li:hover {
-    background-color: var(--sidebar-hover);
-}
-
-.sidebar-container .sidebar ul li:hover a {
-    color: var(--sidebar-highlight);
-}
-
-#container {
-    display: flex;
-}
-
-#content {
-    flex-grow: 1;
-}
-
-#info-container {
-    margin-left: 20px;
-    margin-top: 20px;
-}
-
-#username,
-#name,
-#location {
-    font-size: 50px;
-    padding: 2px;
-}
-
-#edit-btn {
-    font-size: 25px;
-    margin: 2px;
-    margin-left: 10px;
-    padding: 2px;
-}
-
-#recipe-list-name {
-    font-size: 30px;
-    padding: 25px;
-    margin-top: 20px;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    margin-left: 30px;
-}
-
-#food-pic {
-    width: 200px;
-    min-height: 120px;
-    max-height: auto;
-    margin: 3px;
-    padding: 3px;
-    display: flex;
-}
-
-#info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#food-name {
-    flex-grow: 1;
-}
-
-.text {
-    font-size: 50px;
-    padding-left: 50px;
-}
-
 /* Register/Login Page - Start */
 .regLogPage {
     background-color: #000000;
@@ -180,6 +48,14 @@ img {
     font-size: 15px;
     font-family: 'Poppins', sans-serif;
     padding: 10px 40px;
+    cursor: pointer;
+}
+
+.registerSubmit a{
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
     cursor: pointer;
 }
 

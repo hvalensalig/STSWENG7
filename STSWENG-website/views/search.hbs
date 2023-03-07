@@ -1,23 +1,18 @@
 <div id="container">
-    {{>sidebar}}
+    <div id="sidebarContent">
+        {{>sidebar}}
+    </div>
     <div id="search-content">
         <div id="searchinfo-container">
-            <form class="example" action="action_page.php">
+            <p id="text">Search for a recipe!</p>
+            <form class="searchRecipe" action="/search">
                 <input type="text" placeholder="Search.." name="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
         <div id="recipe-list-container">
-            <div id="recipe-list-name"> List of Recipes:</div>
             <div id="recipe-list">
-                {{>recipe}}
 
-                {{#each this}}
-                {{#if name}}
-                {{>recipe}}
-                {{/if}}
-                {{/each}} </div>
-
+            </div>
         </div>
     </div>
-</div>

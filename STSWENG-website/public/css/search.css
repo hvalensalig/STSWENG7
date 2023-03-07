@@ -1,36 +1,43 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 
 /* Style the search field */
-form.example input[type=text] {
+form.searchRecipe input[type=text] {
     padding: 10px;
     font-size: 17px;
-    border: 1px solid grey;
     float: left;
-    width: 80%;
-    background: #f1f1f1;
+    width: 100%;
+    border-radius: 15px;
 }
 
 /* Style the submit button */
-form.example button {
-    float: left;
+form.searchRecipe button {
     width: 20%;
     padding: 10px;
-    background: #2196F3;
+    background: #ffffff;
     color: white;
     font-size: 17px;
     border: 1px solid grey;
     border-left: none;
     /* Prevent double borders */
     cursor: pointer;
+    border:hidden;
 }
 
-form.example button:hover {
+form.searchRecipe button:hover {
     background: #0b7dda;
 }
 
 /* Clear floats */
-form.example::after {
+form.searchRecipe::after {
     content: "";
     clear: both;
     display: table;
+}
+
+#text{
+    font-size: larger;
+    margin-bottom: 10px;
+}
+#search-content{
+    margin: 20px;
 }
