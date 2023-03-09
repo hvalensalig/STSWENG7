@@ -1,0 +1,18 @@
+<div id="container">
+    <div id="sidebarContent">
+        {{>sidebar}}
+    </div>
+    <div id="search-content">
+        <div id="searchinfo-container">
+            <p id="text">Search for a recipe!</p>
+            <form class="searchRecipe" action="/search">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <div id="recipe-list-container">
+            <div id="recipe-list">
+
+            </div>
+        </div>
+    </div>
