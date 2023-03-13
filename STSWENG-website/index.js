@@ -1,9 +1,22 @@
-import "dotenv/config";
+require('dotenv/config');
 
-import express from "express";
-import exphbs from "express-handlebars";
-import routes from './routes/routes.js';
-import db from './models/db.js';
+const express = require('express');
+const exphbs = require('express-handlebars');
+
+const fileUpload = require('express-fileupload');
+const bodyParser = require('body-parser');
+
+const mongoose = require('mongoose');
+//const db = require('./models/db');
+
+const routes = require('./routes/routes');
+const authRouter = require('./routes/auth');
+
+const session = require('express-session');
+const connectMongo = require('connect-mongo');
+const MongoStore = require('connect-mongo');
+
+const flash = require('connect-flash');
 
 const port = process.env.PORT;
 
@@ -13,11 +26,28 @@ app.engine("hbs", exphbs.engine({extname: 'hbs'}));
 app.set("view engine", "hbs");
 app.set("views", "./views");
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`public`));
+app.use(fileUpload());
 
+app.use(session({
+    secret: 'RECIPEISTHEKEY',
+    store: MongoStore.create({mongoUrl: 'mongodb+srv://ReciepWebApp:w33mWQOxeHVC3S2s@recipewebapp.fgdw6pq.mongodb.net/?retryWrites=true&w=majority'}),
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 * 7 },
+}));
+
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.search_error = req.flash('search_error')
+    next();
+});
+
+app.use('/', authRouter);
 app.use(`/`, routes);
-
-db.connect();
 
 app.listen(port, function () {
     console.log(`Server is running at:`);

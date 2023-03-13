@@ -1,7 +1,8 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-const url = process.env.DB_URL ?? "";
+const url = "mongodb+srv://ReciepWebApp:w33mWQOxeHVC3S2s@recipewebapp.fgdw6pq.mongodb.net/?retryWrites=true&w=majority";
 
+/*
 const database = {
 
     connect: function () {
@@ -99,4 +100,11 @@ const database = {
 
 }
 
-export default database;
+module.exports = database;
+*/
+
+mongoose.connect(url)
+    .then(() => console.log('Connected to DB'))
+    .catch((err) => console.log(err))
+
+module.exports = mongoose;
