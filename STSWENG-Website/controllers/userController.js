@@ -7,28 +7,34 @@ exports.register = async (req, res) => {
 
     const errors = validationResult(req)
 
-    const {username, password, rePassword} = req.body;
-    const checkUsername = await user.findOne({username:username})
-    if (checkUsername) {
-        req.flash('error_msg', 'Username is already in use.');
-        console.log('Username is already in use')
-        res.redirect('/register')
-    } else if (password != rePassword) {
-        req.flash('error_msg', 'Password is not the same.');
-        console.log('Password not the same')
-        res.redirect('/register')
-    } else {
-        const saltRounds = 10;
-        bcrypt.hash(password, saltRounds, async (err, hashed) => {
-            const newUser = {
-                username,
-                password: hashed,
-            };
-            await user.create(newUser)
-            req.flash('success_msg', 'You are now Registered');
-            console.log('registered')
+    if (errors.isEmpty()) {
+        const { username, password, rePassword } = req.body;
+        const checkUsername = await user.findOne({username:username})
+        if (checkUsername) {
+            req.flash('error_msg', 'Username is already in use.');
+            console.log('Username is already in use')
             res.redirect('/register')
-        });
+        } else if (password != rePassword) {
+            req.flash('error_msg', 'Password is not the same.');
+            console.log('Password not the same')
+            res.redirect('/register')
+        } else {
+            const saltRounds = 10;
+            bcrypt.hash(password, saltRounds, async (err, hashed) => {
+                const newUser = {
+                    username,
+                    password: hashed,
+                };
+                await user.create(newUser)
+                req.flash('success_msg', 'You are now Registered');
+                console.log('registered')
+                res.redirect('/register')
+            });
+        }
+    } else {
+        const messages = errors.array().map((item) => item.msg);
+        req.flash('error_msg', messages.join("\r"));
+        res.redirect('/register');
     }
 };
 
@@ -57,7 +63,7 @@ exports.login = async (req, res) => {
         }
     } else {
         const messages = errors.array().map((item) => item.msg);
-        req.flash('error_msg', messages.join("\r\n"));
+        req.flash('error_msg', messages.join("\r"));
         res.redirect('/login');
     }
 }

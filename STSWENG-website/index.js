@@ -7,7 +7,7 @@ const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 
 const mongoose = require('mongoose');
-//const db = require('./models/db');
+const db = require('./models/db');
 
 const routes = require('./routes/routes');
 const authRouter = require('./routes/auth');
@@ -29,6 +29,8 @@ app.set("views", "./views");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`public`));
 app.use(fileUpload());
+
+db.connect();
 
 app.use(session({
     secret: 'RECIPEISTHEKEY',
