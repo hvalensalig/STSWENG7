@@ -1,8 +1,7 @@
-import db from '../models/db.js';
-import Recipe from '../models/RecipeModel.js';
+const db = require('../models/db.js');
+const recipe = require('../models/RecipeModel.js');
 
 const controller = {
-
 
     getFavicon: function (req, res) {
         res.status(204);
@@ -51,4 +50,4 @@ const controller = {
 
 }
 
-export default controller;
+module.exports = controller;
