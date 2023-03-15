@@ -14,7 +14,7 @@
     background-color: #FFFFFF;
 }
 
-.registerForm, .loginBox {
+.regLogBox {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -65,5 +65,19 @@
     width: 50%;
     height: 200px;
     background-color: blue;
+}
+
+.return {
+    display:block;
+    margin-top: 5%;
+}
+
+a.return:link {
+    color: black;
+    text-decoration: underline;
+}
+
+a.return:hover {
+    color: red;
 }
 /* Register/Login Page - End */
