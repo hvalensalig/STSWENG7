@@ -54,7 +54,7 @@ exports.login = async (req, res) => {
             bcrypt.compare(password, checkUser.password, (err, result) => {
                 if (result) {
                     req.session.username = checkUser.username;
-                    res.redirect('/admin/orders/all');
+                    res.redirect('/home');
                 } else {
                     req.flash('error_msg', 'Incorrect password!');
                     res.redirect('/login');
@@ -73,7 +73,7 @@ exports.logoutUser = (req, res) => {
     if (req.session.username) {
         req.session.destroy(() => {
             res.clearCookie('connect.sid');
-            res.redirect('/admin');
+            res.redirect('/login');
         });
     }
 };
