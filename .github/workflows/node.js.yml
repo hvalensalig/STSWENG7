@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "register-feature" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "register-feature" ]
+    branches: [ "main" ]
 
 jobs:
   build:
