@@ -9,6 +9,10 @@ const RecipeSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    image: {
+        type: String,
+        required: true
+    },
     minutes: {
         type: Number,
         required: true
@@ -27,4 +31,5 @@ const RecipeSchema = new mongoose.Schema({
     }
 });
 
+RecipeSchema.index({name: 'text'})
 module.exports = mongoose.model('Recipe', RecipeSchema);

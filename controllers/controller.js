@@ -1,5 +1,6 @@
 const db = require('../models/db.js');
 const recipe = require('../models/RecipeModel.js');
+const { validationResult } = require('express-validator');
 
 const controller = {
 
@@ -15,7 +16,32 @@ const controller = {
     },
 
     getSearch: function (req, res) {
-        res.render('search'); 
+        res.render('search');
+    },
+
+    searchRecipe: async function(req, res) {
+        var search = req.body.search
+
+        const errors = validationResult(req)
+
+        if (errors.isEmpty()) {
+            try {
+                var searchPreview = await recipe.find({$text: {$search: search}}).lean()
+            } catch (err) {
+                console.log('Error on finding recipe. Error: \n' + err)
+            }
+
+            if (searchPreview.length > 0) {
+                res.render('search', {preview: searchPreview})
+            } else {
+                req.flash('search_error', 'Recipe not found!');
+                res.redirect('search');
+            }
+        } else {
+            const messages = errors.array().map((item) => item.msg);
+            req.flash('search_error', messages[0]);
+            res.redirect('search');
+        }
     },
 
     getAddRecipe: function (req, res) {
