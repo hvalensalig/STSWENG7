@@ -48,6 +48,7 @@ exports.login = async (req, res) => {
         const checkUser = await user.findOne({username: username})
         if (checkUser == null) {
             req.flash('error_msg', 'Username does not exist!');
+            console.log('Username does not exist')
             res.redirect('/login');
         } else {
             checkUser.toObject()
