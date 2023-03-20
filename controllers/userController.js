@@ -19,11 +19,13 @@ exports.register = async (req, res) => {
             console.log('Password not the same')
             res.redirect('/register')
         } else {
+            const name = username;
             const saltRounds = 10;
             bcrypt.hash(password, saltRounds, async (err, hashed) => {
                 const newUser = {
                     username,
                     password: hashed,
+                    name,
                 };
                 await user.create(newUser)
                 req.flash('success_msg', 'You are now Registered');
@@ -48,13 +50,14 @@ exports.login = async (req, res) => {
         const checkUser = await user.findOne({username: username})
         if (checkUser == null) {
             req.flash('error_msg', 'Username does not exist!');
+            console.log('Username does not exist')
             res.redirect('/login');
         } else {
             checkUser.toObject()
             bcrypt.compare(password, checkUser.password, (err, result) => {
                 if (result) {
                     req.session.username = checkUser.username;
-                    res.redirect('/admin/orders/all');
+                    res.redirect('/home');
                 } else {
                     req.flash('error_msg', 'Incorrect password!');
                     res.redirect('/login');
@@ -73,7 +76,7 @@ exports.logoutUser = (req, res) => {
     if (req.session.username) {
         req.session.destroy(() => {
             res.clearCookie('connect.sid');
-            res.redirect('/admin');
+            res.redirect('/login');
         });
     }
 };

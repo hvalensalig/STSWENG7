@@ -1,6 +1,6 @@
 const express = require('express');
 const controller = require('../controllers/controller.js')
-
+const profileController = require('../controllers/profileController.js')
 const router = express();
 
 router.get(`/favicon.ico`, controller.getFavicon);
@@ -9,7 +9,7 @@ router.get(`/home`, controller.getHome);
 router.get(`/search`, controller.getSearch);
 
 router.get(`/addRecipe`, controller.getAddRecipe);
-//router.post(`/addRecipe`, controller.postAddRecipe);
+router.post(`/addRecipe`, profileController.postAddRecipe);
 
 router.get(`/register`, controller.getRegister);
 //router.post(`/register`, controller.postRegister);

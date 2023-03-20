@@ -8,6 +8,14 @@ const usersSchema = new mongoose.Schema ({
     password: {
         type: mongoose.SchemaTypes.String,
         required: true,
+    },
+    name:{
+        type: mongoose.SchemaTypes.String,
+        required: false,
+    },
+    location:{
+        type: mongoose.SchemaTypes.String,
+        required: false,
     }
 })
 

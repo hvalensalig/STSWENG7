@@ -5,21 +5,82 @@
     <div id="content">
         <div id="info-container">
             <div id="username"> Username: {{username}}</div>
-            <div id="name"> Name: {{Name}} </div>
-            <div id="location"> Location: {{Location}} </div>
+            <div id="name"> Name: {{name}} </div>
+            <div id="location"> Location: {{location}} </div>
             <button id="edit-btn">Edit Profile Details</button>
         </div>
         <div id="recipe-list-container">
             <div id="recipe-list-name"> List of Recipes:</div>
             <div id="recipe-list">
-                {{>recipe}}
-    
-                {{#each this}}
-                    {{#if name}}
+
+                {{#each result2}}
+                    {{#if this}}
                         {{>recipe}}
                     {{/if}}
-                {{/each}} </div>
+                {{/each}}
 
+            </div>
+
+        </div>
+        <div class="box">
+            <a class="button" href="#addRecipe-container">Add recipe</a>
+        </div>
+        <div class="overlay" id="addRecipe-container">
+            <div class="wrapper">
+                <h2>Add a recipe</h2><a class="close" href="#">&times;</a>
+                <div class="content" id="content">
+                    <div class="container" id="addRecipeInfo-container">
+                        <form action="/addRecipe" class="addRecipeForm" method="Post" enctype="multipart/form-data">
+
+                            <div>
+                                <p class="addRecipeStyle" for="recipeImage" id="recipeImage">Recipe Image:</p>
+                                <input class="addRecipeInput" type="file" id="inputImage" placeholder="Add recipe image"
+                                    name="recipe_image" accept="image/*">
+                            </div>
+                            <div>
+                                <p class="addRecipeStyle" for="recipeName" id="recipeName">Recipe Name:</p>
+                                <input class="addRecipeInput" type="text" id="inputName" placeholder="Add recipe name"
+                                    name="recipe_name">
+                                <p class="addRecipeStyle" for="owner" id="owner">Owner:</p>
+                                <input class="addRecipeInput" type="text" id="inputOwner" placeholder="Add owner name"
+                                    name="owner_name">
+                            </div>
+
+                            <div>
+                                <p class="addRecipeStyle" for="cookingTime" id="cookingTime">Cooking Time:</p>
+                                <input class="addRecipeInput" type="number" id="inputMins" min="0" placeholder="min"
+                                    name="recipe_minutes">
+
+                                <p class="colon" for="colon" id="colon">:</p>
+                                <input class="addRecipeInput" type="number" id="inputSecs" min="0" max="59" placeholder="sec"
+                                    name="recipe_seconds">
+                            </div>
+
+                            <div id="1">
+                                <p class="addRecipeStyle" for="ingredients" id="ingredients">Ingredients:</p>
+                                <input class="addIngredientInput" type="text" id="inputIngredient" placeholder="Name"
+                                    name="ingredients">
+                                <input class="addIngredientInput" type="number" id="inputAmount" min="0" placeholder="Amount"
+                                    name="amounts">
+                                <button class="addButton" type="button" id="addButton">+</button>
+                                <div id="addIngredientContainer">
+                                    <!-- CONTAINER FOR ADDING MORE INGREDIENT INPUTS-->
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="addRecipeStyle" for="directions" id="directions">Directions:</p>
+
+                                <textarea cols="80" rows="10" id="inputDirections" type="text" name="recipe_directions"
+                                    placeholder="Add text..."></textarea>
+
+                            </div>
+
+                            <button class="addRecipeSubmit" type="submit" id="addRecipeSubmit">ADD RECIPE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

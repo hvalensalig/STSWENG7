@@ -28,9 +28,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
 
     const addButton = document.querySelector('#addButton');
-    const addhtml = "<input class='addIngredientInput' type='text' id='inputIngredient' placeholder='Name'name='recipe_name'><input class='addIngredientInput' type='number' id='inputAmount' placeholder='Amount'name='recipe_name'>";
+    const addhtml = "<input class='addIngredientInput' type='text' id='inputIngredient' placeholder='Name'name='ingredients'><input class='addIngredientInput' type='number' id='inputAmount' placeholder='Amount'name='amounts'>";
     addButton.addEventListener('click', function () {
         console.log("test");
-        $("#addIngredientContainer").append(addhtml);
+        $("#1").append(addhtml);
     })
 });

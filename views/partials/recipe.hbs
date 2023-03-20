@@ -1,16 +1,37 @@
 <div class="recipe">
-    <!-- <div class="info">
-        <img src="{{image}}" class="icon">
-        <p class="text"> {{name}} </p>
-    </div> -->
 
     <div id="info" class="info">
+        {{#if image}}
         <div id="food-pic">
-            <img src="images\foodie.jfif" class="icon">
+            <img src="images/{{image}}" class="icon">
+        </div>
+        {{else}}
+        <div id="food-pic">
+            <img src="images/foodie.jfif" class="icon">
+        </div>
+        {{/if}}
+
+        <div id="food-info">
+            <p id="recipename" class="recipename"> recipe name: {{recipename}} </p>
+            <p id="owner" class="owner"> owner: {{owner}} </p>
+            <p id="minutes" class="minutes"> minutes: {{minutes}} </p>
+            <p id="seconds" class="seconds"> seconds: {{seconds}} </p>
+            <p id="ingredientname"> ingredients:</p>
+            <div id="ingredient-info">
+                <div id="ingredient">
+                    {{#each ingredients}}
+                        <p id="ingredient-name" class="ingredient-name"> {{ this }} </p>
+                    {{/each}}
+                </div>
+                <div id="ingredient-amount">
+                    {{#each amounts}}
+                        <p id="amount" class="amount"> {{ this }} </p>
+                    {{/each}}
+                </div>
+                
+            </div>
+
         </div>
 
-        <div id="food-name">
-            <p id="text" class="text"> salad </p>
-        </div>
     </div>
 </div>
