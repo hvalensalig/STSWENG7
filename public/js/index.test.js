@@ -8,7 +8,10 @@ describe('Register Input Validator', () => {
     it('When username already exist', async () => {
         const req = {
             body: {
-                username: "jasper",
+                firstname: "josh",
+                lastname: "seeker",
+                location: "Philippines",
+                username: "josh",
                 password: "123456789",
                 rePassword: "123456789",
             },
@@ -20,7 +23,7 @@ describe('Register Input Validator', () => {
             redirect: jest.fn((x) => x),
         };
 
-        user.findOne.mockImplementationOnce(() => ("jasper"));
+        user.findOne.mockImplementationOnce(() => ("josh"));
         
         const log = jest.spyOn(global.console, 'log');
 
@@ -34,6 +37,9 @@ describe('Register Input Validator', () => {
     it('When new password is not the same', async () => {
         const req = {
             body: {
+                firstname: "josh",
+                lastname: "seeker",
+                location: "Philippines",
                 username: "roy",
                 password: "123456789",
                 rePassword: "1234567890",

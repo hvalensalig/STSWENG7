@@ -8,7 +8,7 @@ exports.register = async (req, res) => {
     const errors = validationResult(req)
     
     if (errors.isEmpty()) {
-        const { username, password, rePassword } = req.body;
+        const { firstname, lastname, location, username, password, rePassword } = req.body;
         const checkUsername = await user.findOne({username:username})
         if (checkUsername) {
             req.flash('error_msg', 'Username is already in use.');
@@ -22,6 +22,9 @@ exports.register = async (req, res) => {
             const saltRounds = 10;
             bcrypt.hash(password, saltRounds, async (err, hashed) => {
                 const newUser = {
+                    firstname,
+                    lastname,
+                    location,
                     username,
                     password: hashed,
                 };
