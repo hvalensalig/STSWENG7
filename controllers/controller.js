@@ -44,6 +44,16 @@ const controller = {
         }
     },
 
+    viewRecipe: async function (req, res) {
+        var recipename = req.body.recipename
+        var owner = req.body.owner
+
+        var viewRecipe = await recipe.findOne({recipename: recipename, owner: owner}).lean();
+
+        console.log(viewRecipe)
+        res.render('viewRecipe', {view: viewRecipe});
+    },
+
     getAddRecipe: function (req, res) {
 
         res.render('addRecipe'); 

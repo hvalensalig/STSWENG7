@@ -14,20 +14,24 @@
             {{#each preview}}
             <div id="recipe-list">
                 <!--{{name}}-->
-                <button type="button" class="recipeBox" id="Carousel<%= preview._id %>">      
-                    <div class="recipeImage">
-                        <!--
-                        <img src="<%= preview.image %>" placeholder="<%= preview.name %>" alt="<%= preview.name %>">
-                        <input type="hidden" value="<%= type %>">
-                        -->
-                    </div>
-                    <div class="recipeBoxText">
-                        <div "recipleBoxGrouping">
-                            <div class="recipeBoxName">Recipe Name: {{name}}</div>
-                            <div class="recipeBoxOwner">Owner: {{owner}}</div>
+                <form action="/view" method="Post">
+                    <button type="submit" class="recipeBox" id="Carousel<%= preview._id %>">      
+                        <div class="recipeImage">
+                            <!--
+                            <img src="<%= preview.image %>" placeholder="<%= preview.name %>" alt="<%= preview.name %>">
+                            <input type="hidden" value="<%= type %>">
+                            -->
                         </div>
-                    </div>
-                </button>
+                        <div class="recipeBoxText">
+                            <div "recipleBoxGrouping">
+                                <div class="recipeBoxName">Recipe Name: {{recipename}}</div>
+                                <div class="recipeBoxOwner">Owner: {{owner}}</div>
+                            </div>
+                        </div>
+                    </button>
+                    <input value="{{recipename}}" name="recipename" hidden>
+                    <input value="{{owner}}" name="owner" hidden>
+                </form>
             </div>
             {{/each}}
         </div>

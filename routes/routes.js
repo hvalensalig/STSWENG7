@@ -9,6 +9,7 @@ router.get(`/`, controller.getStart);
 router.get(`/home`, controller.getHome);
 router.get(`/search`, controller.getSearch);
 router.post('/search', searchValidation, controller.searchRecipe);
+router.post('/view', controller.viewRecipe);
 
 router.get(`/addRecipe`, controller.getAddRecipe);
 //router.post(`/addRecipe`, controller.postAddRecipe);

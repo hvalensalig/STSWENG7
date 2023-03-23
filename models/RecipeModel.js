@@ -1,15 +1,11 @@
 const mongoose = require('mongoose');
 
 const RecipeSchema = new mongoose.Schema({
-    name: {
+    recipename: {
         type: String,
         required: true
     },
     owner: {
-        type: String,
-        required: false
-    },
-    image: {
         type: String,
         required: true
     },
@@ -21,15 +17,23 @@ const RecipeSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    ingredientname:{
+    image:{
         type: String,
+        required: false
+    },
+    ingredients: {
+        type: Array,
         required: true
     },
-    ingredientamount:{
-        type: Number,
+    amounts: {
+        type: Array,
+        required: true
+    },
+    username: {
+        type: String,
         required: true
     }
 });
 
-RecipeSchema.index({name: 'text'})
+RecipeSchema.index({recipename: 'text'})
 module.exports = mongoose.model('Recipe', RecipeSchema);
