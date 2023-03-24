@@ -33,4 +33,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
         console.log("test");
         $("#1").append(addhtml);
     })
+
+    //x button
+    const xButton = document.querySelector('.close');
+    xButton.addEventListener('click', function(){
+        console.log("test");
+        window.location.href = "http://localhost:3000/home";
+    });
+    
 });

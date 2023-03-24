@@ -10,6 +10,8 @@ const profileController = {
 
     },
     postAddRecipe: function (req, res) {
+        const success = "Recipe has been added.";
+        const error = "Please fill up everything.";
         try {
             let imageUploadFile;
             let uploadPath;
@@ -38,12 +40,24 @@ const profileController = {
             }
 
             db.insertOne(Recipe, recipe, function (flag) {
+
                 if (flag) {
-                    res.redirect('/home');
+                    req.flash('success_msg', success);
+                    // res.send('home', {successSubmit: success});
+                    res.redirect('/home#addRecipe-container');
+
+                }
+                else{
+                    req.flash('error_msg', error);
+                    res.redirect('/home#addRecipe-container');
                 }
             });
+
+
         } catch (error) {
-            res.redirect('/home');
+            console.log("hello", error);
+            req.flash('errorSubmit', error);
+            res.redirect('/home', { errorSubmit: error });
         }
 
 
