@@ -18,6 +18,7 @@
             <p id="seconds" class="seconds"> seconds: {{seconds}} </p>
             <p id="ingredientname"> ingredients:</p>
             <div id="ingredient-info">
+                <!--
                 <div id="ingredient">
                     {{#each ingredients}}
                         <p id="ingredient-name" class="ingredient-name"> {{ this }} </p>
@@ -26,6 +27,12 @@
                 <div id="ingredient-amount">
                     {{#each amounts}}
                         <p id="amount" class="amount"> {{ this }} </p>
+                    {{/each}}
+                </div>
+                -->
+                <div id="ingredient">
+                    {{#each ingredients}}
+                        <p id="ingredient-name" class="ingredient-name"> {{ this.item }} : {{ this.amount }}</p>
                     {{/each}}
                 </div>
                 

@@ -28,13 +28,18 @@ const profileController = {
                 })
             }
             //console.log("reqbody", req.body);
+            var ingredients = []
+            req.body.ingredients.forEach((val, key) => {
+                ingredients.push({item: val, amount: req.body.amounts[key]})
+            })
+
             const recipe = {
                 image: newImageName,
                 recipename: req.body.recipe_name,
                 owner: req.body.owner_name,
                 minutes: req.body.recipe_minutes,
                 seconds: req.body.recipe_seconds,
-                ingredients: req.body.ingredients,
+                ingredients: ingredients,
                 amounts: req.body.amounts,
                 username: req.session.username
             }
@@ -52,7 +57,6 @@ const profileController = {
                     res.redirect('/home#addRecipe-container');
                 }
             });
-
 
         } catch (error) {
             console.log("hello", error);

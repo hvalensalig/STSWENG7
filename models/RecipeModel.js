@@ -22,11 +22,7 @@ const RecipeSchema = new mongoose.Schema({
         required: false
     },
     ingredients: {
-        type: Array,
-        required: true
-    },
-    amounts: {
-        type: Array,
+        type: Object,
         required: true
     },
     username: {
@@ -35,4 +31,5 @@ const RecipeSchema = new mongoose.Schema({
     }
 });
 
+RecipeSchema.index({recipename: 'text'})
 module.exports = mongoose.model('Recipe', RecipeSchema);
