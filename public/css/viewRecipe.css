@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+#viewRecipeInfo-container {
+    font-size: xx-large;
+    padding: 20px;
+}
+
+#recipeName,
+#owner,
+#cookingTime,
+#colon {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+#owner {
+    margin-left: 50px;
+}
+
+#inputName,
+#inputOwner {
+    /*min-height: 40px;*/
+    font-size: large;
+}
+
+#inputMins,
+#inputSecs {
+    max-width: 50px;
+    /*min-height: 30px;*/
+    font-size: large;
+}
+
+#inputName {
+    flex-grow: 1;
+}
+
+#ingredients {
+    margin-top: 20px;
+}
+
+.addIngredientInput {
+    text-align: center;
+    min-height: 25px;
+    border-radius: 20px;
+    font-size: large;
+}
+
+#inputIngredient {
+    margin-left: 30px;
+    margin-right: 10px;
+}
+
+#addButton {
+    font-size: 25px;
+    border-radius: 50%;
+    border-width: 1px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#addButton:hover {
+    background-color: rgb(202, 202, 202);
+}
+
+#addIngredientContainer {
+    width: 50%;
+}
+
+#directions{
+    margin-top: 30px;
+}
+
+#inputDirections {
+    padding-top: 10px;
+    width: 300px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: large;
+}

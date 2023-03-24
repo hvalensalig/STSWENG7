@@ -22,11 +22,7 @@ const RecipeSchema = new mongoose.Schema({
         required: false
     },
     ingredients: {
-        type: Array,
-        required: true
-    },
-    amounts: {
-        type: Array,
+        type: Object,
         required: true
     },
     username: {

@@ -3,44 +3,31 @@
         {{>sidebar}}
     </div>
     <div id="content">
-        <div id="addRecipeInfo-container">
-            <div class="addRecipeForm">
-
+        <div id="viewRecipeInfo-container">
+            <div class="viewRecipeBox">
                 <div>
-                    <p class="addRecipeStyle" for="recipeImage" id="recipeImage">Recipe Image:</p>
+                    <p class="viewRecipeStyle" for="recipeImage" id="viewRecipeImage">Recipe Image: {{view.image}}</p>
                     <div class="addRecipeInput" id="inputImage" placeholder="Add recipe image" name="recipe_image"></div>
                 </div>
                 <div>
-                    <p class="addRecipeStyle" for="recipeName" id="recipeName">Recipe Name: {{view.username}}</p>
-                    <p class="addRecipeInput" id="inputName" placeholder="Add recipe name"
-                        name="recipe_name">{{recipename}}</p>
-                    <p class="addRecipeStyle" for="owner" id="owner">Owner: {{view.owner}}</p>
-                    <p class="addRecipeInput" id="inputOwner" placeholder="Add owner name"
-                        name="owner_name"></p>
+                    <!-- <p class="viewRecipeStyle" for="recipeName" id="viewRecipeName">Recipe Name: {{view.username}}</p> -->
+                    <p class="viewRecipeStyle" for="recipeName" id="viewRecipeName">Recipe Name: {{view.recipename}}</p>
+                    <p class="viewRecipeStyle" for="owner" id="viewOwner">Owner: {{view.owner}}</p>
                 </div>
 
                 <div>
-                    <p class="addRecipeStyle" for="cookingTime" id="cookingTime">Cooking Time:</p>
-                    <p class="addRecipeInput" id="inputMins" placeholder="min" name="recipe_minutes">{{view.minutes}}</p>
-
-                    <p class="colon" for="colon" id="colon">:</p>
-                    <p class="addRecipeInput" id="inputSecs" placeholder="sec" name="recipe_seconds">{{view.seconds}}</p>
+                    <p class="viewRecipeStyle" for="cookingTime" id="viewCookingTime">Cooking Time: {{view.minutes}} : {{view.seconds}}</p>
                 </div>
 
                 <div id="1">
+                    <p class="viewRecipeStyle" for="ingredients" id="ingredients">Ingredients:</p>
                     {{#each view.ingredients}}
-                    <p class="addRecipeStyle" for="ingredients" id="ingredients">Ingredients:</p>
-                    <p class="addIngredientInput" id="inputIngredient" placeholder="Name"
-                        name="recipe_name">{{this}}</p>
-                    {{/each}}
-                    {{#each view.amount}}
-                    <p class="addIngredientInput" id="inputAmount" placeholder="Amount"
-                        name="recipe_name">{{this}}</p>
+                    <p class="viewIngredients" id="viewIngredients"  name="ingredients">{{this.item}} : {{this.amount}}</p>
                     {{/each}}
                 </div>
 
                 <div>
-                    <p class="addRecipeStyle" for="directions" id="directions">Directions:</p>
+                    <p class="viewRecipeStyle" for="directions" id="directions">Directions:</p>
 
                     <textarea cols="80" rows="10" id="inputDirections" type="text" name="recipe_directions"
                         placeholder="Add text..." readonly></textarea>
