@@ -17,7 +17,8 @@ const profileController = {
             let uploadPath;
             let newImageName;
             if (!req.files || Object.keys(req.files).length === 0) {
-                console.log('No Files were uploaded.');
+                console.log("default image uploaded.");
+                newImageName = "foodie.jfif";
             } else {
                 console.log("reqbody", req.body);
                 imageUploadFile = req.files.recipe_image;
@@ -47,21 +48,23 @@ const profileController = {
             db.insertOne(Recipe, recipe, function (flag) {
 
                 if (flag) {
+                    console.log("Recipe has been added.");
                     req.flash('success_msg', success);
                     // res.send('home', {successSubmit: success});
                     res.redirect('/home#addRecipe-container');
 
                 }
                 else{
+                    console.log("Please fill up everything.");
                     req.flash('error_msg', error);
                     res.redirect('/home#addRecipe-container');
                 }
             });
 
         } catch (error) {
-            console.log("hello", error);
-            req.flash('errorSubmit', error);
-            res.redirect('/home', { errorSubmit: error });
+            console.log("Please fill up everything.");
+            req.flash('error_msg', this.error);
+            res.redirect('/home#addRecipe-container');
         }
 
 

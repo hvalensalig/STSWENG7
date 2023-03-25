@@ -1,6 +1,18 @@
 const mongoose = require('mongoose')
 
 const usersSchema = new mongoose.Schema ({
+    firstname: {
+        type: mongoose.SchemaTypes.String,
+        required: true,
+    },
+    lastname: {
+        type: mongoose.SchemaTypes.String,
+        required: true,
+    },
+    location: {
+        type: mongoose.SchemaTypes.String,
+        required: true,
+    },
     username: {
         type: mongoose.SchemaTypes.String,
         required: true,
@@ -9,14 +21,6 @@ const usersSchema = new mongoose.Schema ({
         type: mongoose.SchemaTypes.String,
         required: true,
     },
-    name:{
-        type: mongoose.SchemaTypes.String,
-        required: false,
-    },
-    location:{
-        type: mongoose.SchemaTypes.String,
-        required: false,
-    }
 })
 
 module.exports = mongoose.model('users', usersSchema)
