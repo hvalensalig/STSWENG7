@@ -19,10 +19,14 @@ const RecipeSchema = new mongoose.Schema({
     },
     image:{
         type: String,
-        required: false
+        required: true
     },
     ingredients: {
         type: Object,
+        required: true
+    },
+    directions:{
+        type: String,
         required: true
     },
     username: {

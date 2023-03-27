@@ -11,7 +11,7 @@ const profileController = {
     },
     postAddRecipe: function (req, res) {
         const success = "Recipe has been added.";
-        const error = "Please fill up everything.";
+        const errors = [];
         try {
             let imageUploadFile;
             let uploadPath;
@@ -30,9 +30,16 @@ const profileController = {
             }
             //console.log("reqbody", req.body);
             var ingredients = []
-            req.body.ingredients.forEach((val, key) => {
-                ingredients.push({item: val, amount: req.body.amounts[key]})
-            })
+            console.log("req",req.body.ingredients);
+            if (Array.isArray(req.body.ingredients)) {
+                req.body.ingredients.forEach((val, key) => {
+                    ingredients.push({ item: val, amount: req.body.amounts[key] })
+                })
+            }
+            else{
+                ingredients.push({item: req.body.ingredients, amount: req.body.amounts});
+            }
+
 
             const recipe = {
                 image: newImageName,
@@ -41,12 +48,29 @@ const profileController = {
                 minutes: req.body.recipe_minutes,
                 seconds: req.body.recipe_seconds,
                 ingredients: ingredients,
-                amounts: req.body.amounts,
+                directions: req.body.recipe_directions,
                 username: req.session.username
             }
 
+            if (recipe.recipename == "") {
+                errors.push("Please input the recipe name.");
+            }
+            if (recipe.owner == "") {
+                errors.push("Please input the recipe owner name.");
+            }
+            if (recipe.minutes == "" || recipe.seconds == "") {
+                errors.push("Please input the recipe cooking time.");
+            }
+            if (recipe.ingredients == "") {
+                errors.push("Please input the ingredients.");
+            }
+            if (recipe.directions == "") {
+                errors.push("Please input the directions.");
+            }
+            
             db.insertOne(Recipe, recipe, function (flag) {
-
+                const errorMsg = errors.join("\r");
+                sleep(500);
                 if (flag) {
                     console.log("Recipe has been added.");
                     req.flash('success_msg', success);
@@ -54,21 +78,25 @@ const profileController = {
                     res.redirect('/home#addRecipe-container');
 
                 }
-                else{
-                    console.log("Please fill up everything.");
-                    req.flash('error_msg', error);
+                else {
+                    console.log("Please fill up everythingsss.");
+                    req.flash('error_msg', errorMsg);
                     res.redirect('/home#addRecipe-container');
                 }
             });
 
         } catch (error) {
-            console.log("Please fill up everything.");
-            req.flash('error_msg', this.error);
+            console.log("Please fill up everything.", error);
+            req.flash('error_msg', error);
             res.redirect('/home#addRecipe-container');
         }
 
 
     },
+    
+}
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 module.exports = profileController;
