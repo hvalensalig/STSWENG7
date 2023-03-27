@@ -6,19 +6,24 @@ const { validationResult } = require('express-validator');
 exports.register = async (req, res) => {
     
     const errors = validationResult(req)
-    
+    //var flag = "";
+    console.log(errors)
+
     if (errors.isEmpty()) {
         const { firstname, lastname, location, username, password, rePassword } = req.body;
         const checkUsername = await user.findOne({username:username})
         if (checkUsername) {
             req.flash('error_msg', 'Username is already in use.');
-            console.log('Username is already in use')
-            res.redirect('/register')
+            console.log('Username is already in use');
+            res.redirect('/register');
+            //flag = "x";
         } else if (password != rePassword) {
             req.flash('error_msg', 'Password is not the same.');
             console.log('Password not the same')
             res.redirect('/register')
+            //flag = "x";
         } else {
+            var error;
             const saltRounds = 10;
             bcrypt.hash(password, saltRounds, async (err, hashed) => {
                 const newUser = {
@@ -33,7 +38,17 @@ exports.register = async (req, res) => {
                 console.log('registered')
                 res.redirect('/register')
             });
+            /*
+            if(!error) {
+                flag = "x";
+            }
+            */
         }
+        /*
+        if (flag == "x") {
+            res.redirect('/register');
+        };
+        */
     } else {
         const messages = errors.array().map((item) => item.msg);
         req.flash('error_msg', messages.join("\r"));
