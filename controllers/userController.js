@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
 
 // Just used when creating the initial admin account for the client
+/*
 exports.register = async (req, res) => {
 
     const errors = validationResult(req)
@@ -37,6 +38,7 @@ exports.register = async (req, res) => {
         res.redirect('/register');
     }
 };
+*/
 
 // Find the admin username and password in the database and compare if it is the same with the input, if yes, redirect to admin.ejs
 exports.login = async (req, res) => {
@@ -55,21 +57,25 @@ exports.login = async (req, res) => {
             bcrypt.compare(password, checkUser.password, (err, result) => {
                 if (result) {
                     req.session.username = checkUser.username;
+                    console.log('Logged In')
                     res.redirect('/home');
                 } else {
                     req.flash('error_msg', 'Incorrect password!');
+                    console.log('Wrong password')
                     res.redirect('/login');
                 }
             });
         }
     } else {
         const messages = errors.array().map((item) => item.msg);
-        req.flash('error_msg', messages.join("\r"));
+        req.flash('error_msg', messages.join("\r\n"));
+        console.log('There is error in the inputs')
         res.redirect('/login');
     }
 }
 
 // Clear the cookie of admin
+/*
 exports.logoutUser = (req, res) => {
     if (req.session.username) {
         req.session.destroy(() => {
@@ -78,4 +84,5 @@ exports.logoutUser = (req, res) => {
         });
     }
 };
+*/
 
