@@ -78,7 +78,7 @@ describe('Login Input Validator', () => {
         const req = {
             body: {
                 username: "jasper",
-                password: "123456789",
+                password: "123456782",
             },
             session: {
                 username: "",
@@ -97,6 +97,38 @@ describe('Login Input Validator', () => {
         
         const log = jest.spyOn(global.console, 'log');
         jest.spyOn(bcrypt, 'compare').mockImplementation((pass, salt, cb) => cb(null, false));
+
+        validationResult.mockImplementation(() => ({
+            isEmpty: jest.fn().mockReturnValue(true),
+            array: jest.fn().mockReturnValue([{ msg: "" }])
+        }));
+        await userController.login(req, res);
+
+        expect(req.flash.mock.calls).toEqual([["error_msg", "Incorrect password!"]]);
+        expect(res.redirect.mock.calls).toEqual([['/login']]);
+        expect(log).toHaveBeenCalledWith('Wrong password');
+        log.mockClear();
+        log.mockRestore();
+    });
+
+    it('When login input error', async () => {
+        const req = {
+            body: {
+                username: "jasper",
+                password: "123456789",
+            },
+
+            flash: jest.fn(),
+        };
+        
+        const res = {
+            redirect: jest.fn(),
+        };
+
+        user.findOne.mockImplementationOnce(() => (null));
+        
+        const log = jest.spyOn(global.console, 'log');
+        jest.spyOn(bcrypt, 'compare').mockImplementation((pass, salt, cb) => cb());
 
         validationResult.mockImplementation(() => ({
             isEmpty: jest.fn().mockReturnValue(false),
