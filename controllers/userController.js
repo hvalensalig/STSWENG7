@@ -4,10 +4,8 @@ const { validationResult } = require('express-validator');
 
 // Just used when creating the initial admin account for the client
 exports.register = async (req, res) => {
-    
+
     const errors = validationResult(req)
-    //var flag = "";
-    console.log(errors)
 
     if (errors.isEmpty()) {
         const { firstname, lastname, location, username, password, rePassword } = req.body;
@@ -16,14 +14,11 @@ exports.register = async (req, res) => {
             req.flash('error_msg', 'Username is already in use.');
             console.log('Username is already in use');
             res.redirect('/register');
-            //flag = "x";
         } else if (password != rePassword) {
             req.flash('error_msg', 'Password is not the same.');
             console.log('Password not the same')
             res.redirect('/register')
-            //flag = "x";
         } else {
-            var error;
             const saltRounds = 10;
             bcrypt.hash(password, saltRounds, async (err, hashed) => {
                 const newUser = {
@@ -38,20 +33,10 @@ exports.register = async (req, res) => {
                 console.log('registered')
                 res.redirect('/register')
             });
-            /*
-            if(!error) {
-                flag = "x";
-            }
-            */
         }
-        /*
-        if (flag == "x") {
-            res.redirect('/register');
-        };
-        */
     } else {
         const messages = errors.array().map((item) => item.msg);
-        req.flash('error_msg', messages.join("\r"));
+        req.flash('error_msg', messages.join("\r\n"));
         console.log('There is error in the inputs')
         res.redirect('/register');
     }

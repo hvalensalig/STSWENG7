@@ -2,9 +2,9 @@ const userController = require('../../controllers/userController');
 const user = require('../../models/users');
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
-const { registerValidation } = require('../../validators.js');
 
 jest.mock('../../models/users');
+jest.mock('express-validator')
 
 describe('Register Input Validator', () => {
 
@@ -30,6 +30,10 @@ describe('Register Input Validator', () => {
 
         const log = jest.spyOn(global.console, 'log');
 
+        validationResult.mockImplementation(() => ({
+            isEmpty: jest.fn().mockReturnValue(true),
+            array: jest.fn().mockReturnValue([{ msg: "" }])
+        }));
         await userController.register(req, res);
 
         expect(req.flash.mock.calls).toEqual([['error_msg', 'Username is already in use.']]);
@@ -61,6 +65,10 @@ describe('Register Input Validator', () => {
 
         const log = jest.spyOn(global.console, 'log');
 
+        validationResult.mockImplementation(() => ({
+            isEmpty: jest.fn().mockReturnValue(true),
+            array: jest.fn().mockReturnValue([{ msg: "" }])
+        }));
         await userController.register(req, res);
 
         expect(req.flash.mock.calls).toEqual([['error_msg', 'Password is not the same.']]);
@@ -74,6 +82,9 @@ describe('Register Input Validator', () => {
     it('When new user', async () => {
         const req = {
             body: {
+                firstname: "roy",
+                lastname: "seeker",
+                location: "Philippines",
                 username: "roy",
                 password: "123456789",
                 rePassword: "123456789",
@@ -96,7 +107,13 @@ describe('Register Input Validator', () => {
         const log = jest.spyOn(global.console, 'log');
         jest.spyOn(bcrypt, 'hash').mockImplementation((pass, salt, cb) => cb());
 
+        validationResult.mockImplementation(() => ({
+            isEmpty: jest.fn().mockReturnValue(true),
+            array: jest.fn().mockReturnValue([{ msg: "" }])
+        }));
         await userController.register(req, res);
+
+        expect(req.flash.mock.calls).toEqual([["success_msg", "You are now Registered."]]);
         expect(res.redirect.mock.calls).toEqual([["/register"]]);
         expect(log).toHaveBeenCalledWith('registered');
         log.mockClear();
@@ -106,9 +123,12 @@ describe('Register Input Validator', () => {
     it('When registration input error', async () => {
         const req = {
             body: {
-                username: null,
-                password: null,
-                rePassword: null,
+                firstname: "",
+                lastname: "",
+                location: "",
+                username: "josh",
+                password: "123456789",
+                rePassword: "123456789",
             },
 
             flash: jest.fn(),
@@ -119,13 +139,18 @@ describe('Register Input Validator', () => {
         };
 
         user.findOne.mockImplementationOnce(() => (null));
-        //validationResult.mockImplementationOnce(() => ([]));
 
         const log = jest.spyOn(global.console, 'log');
 
+        validationResult.mockImplementation(() => ({
+            isEmpty: jest.fn().mockReturnValue(false),
+            array: jest.fn().mockReturnValue([{ msg: "First Name is required!" }, 
+            { msg: "Last Name is required!" }, 
+            { msg: "Location is required!" }])
+        }));
         await userController.register(req, res);
         
-        //expect(req.flash.mock.calls).toEqual([["error_msg", "Password is not the same."]]);
+        expect(req.flash.mock.calls).toEqual([["error_msg", "First Name is required!\r\nLast Name is required!\r\nLocation is required!"]]);
         expect(res.redirect.mock.calls).toEqual([['/register']]);
         expect(log).toHaveBeenCalledWith('There is error in the inputs');
         log.mockClear();
