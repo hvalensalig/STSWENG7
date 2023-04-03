@@ -136,7 +136,7 @@ describe('Login Input Validator', () => {
         }));
         await userController.login(req, res);
 
-        expect(req.flash.mock.calls).toEqual([["error_msg", "Username is required!\r\nPassword is required!"]]);
+        expect(req.flash.mock.calls).toEqual([["error_msg", "Username is required!\rPassword is required!"]]);
         expect(res.redirect.mock.calls).toEqual([['/login']]);
         expect(log).toHaveBeenCalledWith('There is error in the inputs');
         log.mockClear();
