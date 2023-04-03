@@ -8,12 +8,12 @@ exports.register = async (req, res) => {
     const errors = validationResult(req)
 
     if (errors.isEmpty()) {
-        const { username, password, rePassword } = req.body;
+        const { firstname, lastname, location, username, password, rePassword } = req.body;
         const checkUsername = await user.findOne({username:username})
         if (checkUsername) {
             req.flash('error_msg', 'Username is already in use.');
-            console.log('Username is already in use')
-            res.redirect('/register')
+            console.log('Username is already in use');
+            res.redirect('/register');
         } else if (password != rePassword) {
             req.flash('error_msg', 'Password is not the same.');
             console.log('Password not the same')
@@ -22,11 +22,14 @@ exports.register = async (req, res) => {
             const saltRounds = 10;
             bcrypt.hash(password, saltRounds, async (err, hashed) => {
                 const newUser = {
+                    firstname,
+                    lastname,
+                    location,
                     username,
                     password: hashed,
                 };
                 await user.create(newUser)
-                req.flash('success_msg', 'You are now Registered');
+                req.flash('success_msg', 'You are now Registered.');
                 console.log('registered')
                 res.redirect('/register')
             });
@@ -34,11 +37,13 @@ exports.register = async (req, res) => {
     } else {
         const messages = errors.array().map((item) => item.msg);
         req.flash('error_msg', messages.join("\r"));
+        console.log('There is error in the inputs')
         res.redirect('/register');
     }
 };
 
 // Find the admin username and password in the database and compare if it is the same with the input, if yes, redirect to admin.ejs
+/*
 exports.login = async (req, res) => {
 
     const errors = validationResult(req)
@@ -77,4 +82,5 @@ exports.logoutUser = (req, res) => {
         });
     }
 };
+*/
 
