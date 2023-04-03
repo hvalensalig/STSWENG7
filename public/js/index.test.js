@@ -150,7 +150,7 @@ describe('Register Input Validator', () => {
         }));
         await userController.register(req, res);
         
-        expect(req.flash.mock.calls).toEqual([["error_msg", "First Name is required!\r\nLast Name is required!\r\nLocation is required!"]]);
+        expect(req.flash.mock.calls).toEqual([["error_msg", "First Name is required!\rLast Name is required!\rLocation is required!"]]);
         expect(res.redirect.mock.calls).toEqual([['/register']]);
         expect(log).toHaveBeenCalledWith('There is error in the inputs');
         log.mockClear();
