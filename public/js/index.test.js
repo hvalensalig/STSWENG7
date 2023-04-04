@@ -74,7 +74,7 @@ describe('Login Input Validator', () => {
         log.mockRestore();
     });
 
-    it('When user exist and password is correct', async () => {
+    it('When user exist and password is incorrect', async () => {
         const req = {
             body: {
                 username: "jasper",
