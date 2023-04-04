@@ -1,6 +1,6 @@
 const express = require('express');
 const controller = require('../controllers/controller.js')
-const { isPublic, isPrivate } = require('../middlewares/userAuth');;
+const { isPublic, isPrivate } = require('../middlewares/userAuth');
 
 const router = express();
 
