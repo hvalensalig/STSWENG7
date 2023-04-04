@@ -75,7 +75,6 @@ exports.login = async (req, res) => {
 }
 
 // Clear the cookie of admin
-/*
 exports.logoutUser = (req, res) => {
     if (req.session.username) {
         req.session.destroy(() => {
@@ -84,5 +83,4 @@ exports.logoutUser = (req, res) => {
         });
     }
 };
-*/
 

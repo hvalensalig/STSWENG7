@@ -1,22 +1,24 @@
 const express = require('express');
 const controller = require('../controllers/controller.js')
+const { isPublic, isPrivate } = require('../middlewares/userAuth');;
 
 const router = express();
 
 router.get(`/favicon.ico`, controller.getFavicon);
-router.get(`/`, controller.getStart);
-router.get(`/home`, controller.getHome);
-router.get(`/search`, controller.getSearch);
+//router.get(`/`, controller.getStart);
+router.get(`/`, isPublic, controller.getLogin);
+router.get(`/home`, isPrivate, controller.getHome);
+router.get(`/search`, isPrivate, controller.getSearch);
 
-router.get(`/addRecipe`, controller.getAddRecipe);
+router.get(`/addRecipe`, isPrivate, controller.getAddRecipe);
 //router.post(`/addRecipe`, controller.postAddRecipe);
 
-router.get(`/register`, controller.getRegister);
+router.get(`/register`, isPublic, controller.getRegister);
 //router.post(`/register`, controller.postRegister);
 
-router.get(`/login`, controller.getLogin);
+router.get(`/login`, isPublic, controller.getLogin);
 //router.post(`/login`, controller.postLogin);
 
-router.get(`/logout`, controller.getLogout);
+//router.get(`/logout`, controller.getLogout);
 
 module.exports = router;
