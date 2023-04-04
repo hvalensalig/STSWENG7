@@ -142,4 +142,30 @@ describe('Login Input Validator', () => {
         log.mockClear();
         log.mockRestore();
     });
+}),
+
+describe('Logout Validator', () => {
+
+    it('When logut is a successs', () => {
+        const req = {
+            session: {
+                username: "jasper",
+                destroy: jest.fn().mockImplementation((fn) => fn()),
+            },
+        };
+        
+        const res = {
+            clearCookie: jest.fn(),
+            redirect: jest.fn(),
+        };
+        
+        const log = jest.spyOn(global.console, 'log');
+
+        userController.logoutUser(req, res);
+
+        expect(res.redirect.mock.calls).toEqual([["/login"]]);
+        expect(log).toHaveBeenCalledWith('User logged out');
+        log.mockClear();
+        log.mockRestore();
+    });
 });

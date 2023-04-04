@@ -78,6 +78,7 @@ exports.login = async (req, res) => {
 exports.logoutUser = (req, res) => {
     if (req.session.username) {
         req.session.destroy(() => {
+            console.log("User logged out");
             res.clearCookie('connect.sid');
             res.redirect('/login');
         });
