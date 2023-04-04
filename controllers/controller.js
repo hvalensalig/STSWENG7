@@ -31,15 +31,19 @@ const controller = {
                 console.log('Error on finding recipe. Error: \n' + err)
             }
 
+            console.log(searchPreview.length)
             if (searchPreview.length > 0) {
-                res.render('search', {preview: searchPreview})
+                console.log("Search Exist");
+                res.render('search', {preview: searchPreview});
             } else {
+                console.log("Search does not Exist");
                 req.flash('search_error', 'Recipe not found!');
                 res.redirect('search');
             }
         } else {
             const messages = errors.array().map((item) => item.msg);
             req.flash('search_error', messages[0]);
+            console.log("Search input is required")
             res.redirect('search');
         }
     },
@@ -50,7 +54,8 @@ const controller = {
 
         var viewRecipe = await recipe.findOne({recipename: recipename, owner: owner}).lean();
 
-        console.log(viewRecipe)
+        //console.log(viewRecipe)
+        console.log("View result is displayed")
         res.render('viewRecipe', {view: viewRecipe});
     },
 
