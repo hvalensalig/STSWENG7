@@ -21,7 +21,6 @@ const usersSchema = new mongoose.Schema ({
         type: mongoose.SchemaTypes.String,
         required: true,
     },
-
 })
 
 module.exports = mongoose.model('users', usersSchema)
