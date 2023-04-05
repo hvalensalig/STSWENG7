@@ -6,6 +6,7 @@ const { validationResult } = require('express-validator');
 exports.register = async (req, res) => {
 
     const errors = validationResult(req)
+    console.log(errors)
 
     if (errors.isEmpty()) {
         const { firstname, lastname, location, username, password, rePassword } = req.body;
