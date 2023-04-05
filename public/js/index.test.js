@@ -138,8 +138,6 @@ describe('Register Input Validator', () => {
             redirect: jest.fn(),
         };
 
-        user.findOne.mockImplementationOnce(() => (null));
-
         const log = jest.spyOn(global.console, 'log');
 
         validationResult.mockImplementation(() => ({
@@ -226,7 +224,7 @@ describe('Login Input Validator', () => {
         log.mockRestore();
     });
 
-    it('When user exist and password is correct', async () => {
+    it('When user exist and password is incorrect', async () => {
         const req = {
             body: {
                 username: "jasper",
