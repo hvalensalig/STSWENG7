@@ -73,8 +73,9 @@ const profileController = {
             let uploadPath;
             let newImageName;
             if (!req.files || Object.keys(req.files).length === 0) {
-                console.log("default image uploaded.");
-                newImageName = "foodie.jfif";
+                //console.log("default image uploaded.");
+                errors.push("Please input the recipe image.");
+                //newImageName = "foodie.jfif";
             } else {
                 console.log("reqbody", req.body);
                 imageUploadFile = req.files.recipe_image;
