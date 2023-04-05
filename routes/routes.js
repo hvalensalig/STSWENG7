@@ -11,7 +11,7 @@ router.get(`/search`, controller.getSearch);
 router.get(`/addRecipe`, controller.getAddRecipe);
 router.post(`/addRecipe`, profileController.postAddRecipe);
 
-router.get(`/register`, controller.getRegister);
+//router.get(`/register`, controller.getRegister);
 //router.post(`/register`, controller.postRegister);
 
 router.get(`/login`, controller.getLogin);
@@ -19,4 +19,6 @@ router.post(`/login`, controller.postLogin);
 
 router.get(`/logout`, controller.getLogout);
 
+router.get(`/editProfile`, profileController.getEditProfile);
+router.post(`/editProfile`, profileController.postEditProfile);
 module.exports = router;

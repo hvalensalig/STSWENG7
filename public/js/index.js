@@ -40,5 +40,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
         console.log("test");
         window.location.href = "http://localhost:3000/home";
     });
+
+    //edit button
+    const editButton = document.querySelector('#edit-btn');
+    editButton.addEventListener('click', function(){
+
+        console.log("test");
+        window.location.href = '/editProfile';
+    });
     
 });

@@ -4,7 +4,63 @@ const User = require('../models/users.js');
 
 const profileController = {
 
-    updateProfile: function (req, res) {
+    postEditProfile: function (req, res) {
+        const success = "Profile has been updated.";
+        const errors = [];
+        let decide = false;
+        try {
+            const profile = {
+                username: req.body.username,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                location: req.body.location
+            }
+            if (profile.firstname != "") {
+                db.updateOne(User, { username: req.session.username }, { $set: { firstname: profile.firstname } }, function(flag){
+                    if(flag){
+                        decide = true;
+                    }
+                });
+            }
+            if (profile.lastname != "") {
+                db.updateOne(User, { username: req.session.username }, { $set: { lastname: profile.lastname } }, function(flag){
+                    if(flag){
+                        decide = true;
+                    }
+                });
+
+            }
+            if (profile.location != "") {
+                db.updateOne(User, { username: req.session.username }, { $set: { location: profile.location } }, function(flag){
+                    if(flag){
+                        decide = true;
+                    }
+                });
+            }
+            console.log("Profile has been updated.");
+            if(decide){
+                req.flash('success_msg1', success);
+                res.redirect('/home');
+            }
+            else{
+                req.flash('error_msg1', "No changes were made.");
+                res.redirect('/home');
+            }
+            
+
+        }
+        catch (error) {
+            console.log("error", error);
+        }
+    },
+    getEditProfile: function (req, res) {
+        var query = { username: req.session.username };
+        var projection = { _id: 0, __v: 0 };
+        db.findOne(User, query, projection, function (result) {
+            if (result != null) {
+                res.render('editProfile', { username: result.username, firstname: result.firstname, lastname: result.lastname, location: result.location });
+            }
+        });
     },
     getRecipes: function (req, res) {
 
@@ -30,14 +86,14 @@ const profileController = {
             }
             //console.log("reqbody", req.body);
             var ingredients = []
-            console.log("req",req.body.ingredients);
+            console.log("req", req.body.ingredients);
             if (Array.isArray(req.body.ingredients)) {
                 req.body.ingredients.forEach((val, key) => {
                     ingredients.push({ item: val, amount: req.body.amounts[key] })
                 })
             }
-            else{
-                ingredients.push({item: req.body.ingredients, amount: req.body.amounts});
+            else {
+                ingredients.push({ item: req.body.ingredients, amount: req.body.amounts });
             }
 
 
@@ -67,7 +123,7 @@ const profileController = {
             if (recipe.directions == "") {
                 errors.push("Please input the directions.");
             }
-            
+
             db.insertOne(Recipe, recipe, function (flag) {
                 const errorMsg = errors.join("\r");
                 sleep(500);
@@ -93,7 +149,7 @@ const profileController = {
 
 
     },
-    
+
 }
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

@@ -25,7 +25,7 @@ const controller = {
                         console.log("result2", result2);
                         if (result2 != null) {
                             res.render('home', { username: result1.username, 
-                                name: result1.name, 
+                                name: result1.firstname+result1.lastname, 
                                 location: result1.location, 
                                 page1: '#4a89ff', 
                                 result2: result2});
