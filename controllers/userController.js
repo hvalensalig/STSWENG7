@@ -7,7 +7,6 @@ const { validationResult } = require('express-validator');
 exports.register = async (req, res) => {
     
     const errors = validationResult(req)
-    //var flag = "";
     console.log(errors)
 
     if (errors.isEmpty()) {
