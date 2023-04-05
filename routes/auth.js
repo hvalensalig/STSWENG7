@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const userController = require('../controllers/userController');
-const { registerValidation, loginValidation } = require('../validators.js');
-const { isPublic, isPrivate } = require('../middlewares/userAuth');
+const { registerValidation, loginValidation } = require('../validators.js')
 
-router.post('/register', isPublic, registerValidation, userController.register)
-router.post('/login', isPublic, loginValidation, userController.login);
-router.get(`/logout`, isPrivate, userController.logoutUser);
+router.post('/register', registerValidation, userController.register)
+router.post('/login', loginValidation, userController.login)
+//router.get('/logout', userController.logoutUser)
+
+module.exports = router;
