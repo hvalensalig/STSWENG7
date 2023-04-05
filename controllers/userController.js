@@ -37,13 +37,12 @@ exports.register = async (req, res) => {
     } else {
         const messages = errors.array().map((item) => item.msg);
         req.flash('error_msg', messages.join("\r"));
-        console.log('There is error in the inputs');
+        console.log('There is error in the inputs')
         res.redirect('/register');
     }
 };
 
 // Find the admin username and password in the database and compare if it is the same with the input, if yes, redirect to admin.ejs
-/*
 exports.login = async (req, res) => {
 
     const errors = validationResult(req)
@@ -60,7 +59,8 @@ exports.login = async (req, res) => {
             bcrypt.compare(password, checkUser.password, (err, result) => {
                 if (result) {
                     req.session.username = checkUser.username;
-                    res.redirect('/admin/orders/all');
+                    console.log('Logged In')
+                    res.redirect('/home');
                 } else {
                     req.flash('error_msg', 'Incorrect password!');
                     console.log('Wrong password');
@@ -80,9 +80,9 @@ exports.login = async (req, res) => {
 exports.logoutUser = (req, res) => {
     if (req.session.username) {
         req.session.destroy(() => {
+            console.log("User logged out");
             res.clearCookie('connect.sid');
-            res.redirect('/admin');
+            res.redirect('/login');
         });
     }
 };
-*/
