@@ -50,6 +50,7 @@ exports.login = async (req, res) => {
         const checkUser = await user.findOne({username: username})
         if (checkUser == null) {
             req.flash('error_msg', 'Username does not exist!');
+            console.log('Username does not exist')
             res.redirect('/login');
         } else {
             checkUser.toObject()
@@ -59,6 +60,7 @@ exports.login = async (req, res) => {
                     res.redirect('/admin/orders/all');
                 } else {
                     req.flash('error_msg', 'Incorrect password!');
+                    console.log('Wrong password')
                     res.redirect('/login');
                 }
             });
@@ -66,6 +68,7 @@ exports.login = async (req, res) => {
     } else {
         const messages = errors.array().map((item) => item.msg);
         req.flash('error_msg', messages.join("\r"));
+        console.log('There is error in the inputs')
         res.redirect('/login');
     }
 }
