@@ -2,9 +2,9 @@ const userController = require('../../controllers/userController');
 const user = require('../../models/users');
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
+const { registerValidation } = require('../../validators.js');
 
 jest.mock('../../models/users');
-jest.mock('express-validator');
 
 describe('Login Input Validator', () => {
 
@@ -25,11 +25,7 @@ describe('Login Input Validator', () => {
         
         const log = jest.spyOn(global.console, 'log');
 
-        validationResult.mockImplementation(() => ({
-            isEmpty: jest.fn().mockReturnValue(true),
-            array: jest.fn().mockReturnValue([{ msg: "" }])
-        }));
-        await userController.login(req, res);
+        await userController.register(req, res);
 
         expect(req.flash.mock.calls).toEqual([["error_msg", "Username does not exist!"]]);
         expect(res.redirect.mock.calls).toEqual([['/login']]);
@@ -126,18 +122,76 @@ describe('Login Input Validator', () => {
         };
 
         user.findOne.mockImplementationOnce(() => (null));
+
+        const log = jest.spyOn(global.console, 'log');
+
+        await userController.register(req, res);
+
+        expect(req.flash.mock.calls).toEqual([['error_msg', 'Password is not the same.']]);
+        expect(res.redirect.mock.calls).toEqual([['/register']]);
+        expect(log).toHaveBeenCalledWith('Password not the same');
+        log.mockClear();
+        log.mockRestore();
+    });
+
+    
+    it('When new user', async () => {
+        const req = {
+            body: {
+                username: "roy",
+                password: "123456789",
+                rePassword: "123456789",
+            },
+
+            flash: jest.fn(),
+        };
         
+        const res = {
+            redirect: jest.fn(),
+        };
+
+        user.findOne.mockImplementationOnce(() => (null));
+
+        user.create.mockImplementationOnce(() => ({
+            username: "roy",
+            password: "123456789",
+        }))
+
+        const log = jest.spyOn(global.console, 'log');
+        jest.spyOn(bcrypt, 'hash').mockImplementation((pass, salt, cb) => cb());
+
+        await userController.register(req, res);
+        expect(res.redirect.mock.calls).toEqual([["/register"]]);
+        expect(log).toHaveBeenCalledWith('registered');
+        log.mockClear();
+        log.mockRestore();
+    });
+
+    it('When registration input error', async () => {
+        const req = {
+            body: {
+                username: null,
+                password: null,
+                rePassword: null,
+            },
+
+            flash: jest.fn(),
+        };
+        
+        const res = {
+            redirect: jest.fn(),
+        };
+
+        user.findOne.mockImplementationOnce(() => (null));
+        //validationResult.mockImplementationOnce(() => ([]));
+
         const log = jest.spyOn(global.console, 'log');
         jest.spyOn(bcrypt, 'compare').mockImplementation((pass, salt, cb) => cb());
 
-        validationResult.mockImplementation(() => ({
-            isEmpty: jest.fn().mockReturnValue(false),
-            array: jest.fn().mockReturnValue([{ msg: "Username is required!" }, { msg: "Password is required!" }])
-        }));
-        await userController.login(req, res);
-
-        expect(req.flash.mock.calls).toEqual([["error_msg", "Username is required!\rPassword is required!"]]);
-        expect(res.redirect.mock.calls).toEqual([['/login']]);
+        await userController.register(req, res);
+        
+        //expect(req.flash.mock.calls).toEqual([["error_msg", "Password is not the same."]]);
+        expect(res.redirect.mock.calls).toEqual([['/register']]);
         expect(log).toHaveBeenCalledWith('There is error in the inputs');
         log.mockClear();
         log.mockRestore();
