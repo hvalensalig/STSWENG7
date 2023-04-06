@@ -52,7 +52,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
     //delete recipe
     const deleteButton = document.querySelector('#delete-btn');
     deleteButton.addEventListener('click', function () {
-        console.log("test");
 
+        var recipeid = $("#recipeid").text();
+       window.location.href = '/deleteRecipe?id='+ recipeid;
     });
 });

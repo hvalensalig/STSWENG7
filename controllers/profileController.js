@@ -157,7 +157,22 @@ const profileController = {
     },
 
     deleteRecipe: function (req, res) {
-        
+        try{
+            let recipeId = req.query.id;
+    
+            var query = { _id: recipeId};
+
+            var projection = { __v: 0 };
+            db.deleteOne(Recipe, query,function(flag){
+                //console.log(result);
+
+                res.redirect('home');
+            });
+            
+            
+        }catch(error){
+            res.status(500).send(error.message);
+        }
     },
 
     viewRecipe: function(req,res){
