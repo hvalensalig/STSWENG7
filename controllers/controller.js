@@ -49,12 +49,12 @@ const controller = {
     },
 
     viewRecipe: async function (req, res) {
+        var uniqueID = req.body.uniqueID
         var recipename = req.body.recipename
         var owner = req.body.owner
 
-        var viewRecipe = await recipe.findOne({recipename: recipename, owner: owner}).lean();
+        var viewRecipe = await recipe.findOne({_id: uniqueID, recipename: recipename, owner: owner}).lean();
 
-        //console.log(viewRecipe)
         console.log("View result is displayed")
         res.render('viewRecipe', {view: viewRecipe});
     },
