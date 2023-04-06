@@ -1,9 +1,9 @@
-const userController = require('../../controllers/userController');
-const user = require('../../models/users');
+const userController = require('../controllers/userController');
+const user = require('../models/users');
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
 
-jest.mock('../../models/users');
+jest.mock('../models/users');
 jest.mock('express-validator')
 
 describe('Register Input Validator', () => {
