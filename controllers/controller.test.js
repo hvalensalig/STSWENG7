@@ -1,8 +1,8 @@
-const controller = require('../../controllers/controller');
-const recipe = require('../../models/RecipeModel');
+const controller = require('../controllers/controller');
+const recipe = require('../models/RecipeModel');
 const { validationResult } = require('express-validator');
 
-jest.mock('../../models/RecipeModel');
+jest.mock('../models/RecipeModel');
 jest.mock('express-validator');
 
 describe('Search Validator', () => {
