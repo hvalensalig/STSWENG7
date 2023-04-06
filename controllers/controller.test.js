@@ -108,13 +108,14 @@ describe('Search Validator', () => {
         log.mockClear();
         log.mockRestore();
     })
-},
+});
 
 describe('View Validator', () => {
 
     it('Return Recipes found', async () => {
         const req = {
             body: {
+                _id: 123456788,
                 recipeName: "chicken",
                 owner: "fred",
             },
@@ -133,10 +134,6 @@ describe('View Validator', () => {
 
         const log = jest.spyOn(global.console, 'log');
 
-        validationResult.mockImplementation(() => ({
-            isEmpty: jest.fn().mockReturnValue(false),
-            array: jest.fn().mockReturnValue([{ msg: "Search input is required!" }])
-        }));
         await controller.viewRecipe(req, res);
 
         expect(req.flash.mock.calls).toEqual([]);
@@ -144,5 +141,36 @@ describe('View Validator', () => {
         expect(log).toHaveBeenCalledWith('View result is displayed');
         log.mockClear();
         log.mockRestore();
-    })
-}))
+    });
+
+    it('Return Recipes not found', async () => {
+        const req = {
+            body: {
+                _id: 123456788,
+                recipeName: "chicken",
+                owner: "fred",
+            },
+
+            flash: jest.fn(),
+        };
+        
+        const res = { 
+            render: jest.fn(),
+            redirect: jest.fn(),
+        };
+
+        recipe.findOne.mockImplementationOnce(() => ({
+            lean: jest.fn().mockReturnValue(null),
+        }));
+
+        const log = jest.spyOn(global.console, 'log');
+
+        await controller.viewRecipe(req, res);
+
+        expect(req.flash.mock.calls).toEqual([]);
+        expect(res.redirect.mock.calls).toEqual([["search"]]);
+        expect(log).toHaveBeenCalledWith('View result is gone');
+        log.mockClear();
+        log.mockRestore();
+    });
+});

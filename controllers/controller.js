@@ -55,8 +55,13 @@ const controller = {
 
         var viewRecipe = await recipe.findOne({_id: uniqueID, recipename: recipename, owner: owner}).lean();
 
-        console.log("View result is displayed")
-        res.render('viewRecipe', {view: viewRecipe});
+        if(viewRecipe != null) {
+            console.log("View result is displayed");
+            res.render('viewRecipe', {view: viewRecipe});
+        } else {
+            console.log("View result is gone");
+            res.redirect('search');
+        }
     },
 
     getAddRecipe: function (req, res) {
