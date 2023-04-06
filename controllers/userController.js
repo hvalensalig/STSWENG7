@@ -2,7 +2,7 @@ const user = require('../models/users');
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
 
-// Just used when creating the initial admin account for the client
+// Create the users account to use the web application
 exports.register = async (req, res) => {
 
     const errors = validationResult(req)
@@ -42,7 +42,7 @@ exports.register = async (req, res) => {
     }
 };
 
-// Find the admin username and password in the database and compare if it is the same with the input, if yes, redirect to admin.ejs
+// Find the users username and password in the database and compare if it is the same with the input, if yes, redirect to home
 exports.login = async (req, res) => {
 
     const errors = validationResult(req)
@@ -76,7 +76,7 @@ exports.login = async (req, res) => {
     }
 }
 
-// Clear the cookie of admin
+// Clear the cookie of the user
 exports.logoutUser = (req, res) => {
     if (req.session.username) {
         req.session.destroy(() => {
