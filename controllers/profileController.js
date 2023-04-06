@@ -111,18 +111,23 @@ const profileController = {
 
             if (recipe.recipename == "") {
                 errors.push("Please input the recipe name.");
+                console.log("Please input the recipe name.");
             }
             if (recipe.owner == "") {
                 errors.push("Please input the recipe owner name.");
+                console.log("Please input the recipe owner name.");
             }
             if (recipe.minutes == "" || recipe.seconds == "") {
                 errors.push("Please input the recipe cooking time.");
+                console.log("Please input the recipe cooking time.");
             }
             if (recipe.ingredients == "") {
                 errors.push("Please input the ingredients.");
+                console.log("Please input the ingredients.");
             }
             if (recipe.directions == "") {
                 errors.push("Please input the directions.");
+                console.log("Please input the directions.");
             }
 
             db.insertOne(Recipe, recipe, function (flag) {
@@ -149,6 +154,29 @@ const profileController = {
         }
 
 
+    },
+
+    deleteRecipe: function (req, res) {
+        
+    },
+
+    viewRecipe: function(req,res){
+        try{
+            let recipeId = req.params.id;
+        
+            var query = { _id: recipeId};
+
+            var projection = { __v: 0 };
+
+            db.findOne(Recipe, query, projection, function(result){
+                //console.log(result);
+                res.render('recipePage', {recipe: result});
+            });
+            
+            
+        }catch(error){
+            res.status(500).send("Error Occurred");
+        }
     },
 
 }

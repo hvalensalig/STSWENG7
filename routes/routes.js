@@ -21,4 +21,7 @@ router.get(`/logout`, controller.getLogout);
 
 router.get(`/editProfile`, profileController.getEditProfile);
 router.post(`/editProfile`, profileController.postEditProfile);
+
+router.get(`/deleteRecipe`, profileController.deleteRecipe);
+router.get(`/recipe/:id`, profileController.viewRecipe);
 module.exports = router;

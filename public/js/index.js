@@ -48,5 +48,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
         console.log("test");
         window.location.href = '/editProfile';
     });
-    
+
+    //delete recipe
+    const deleteButton = document.querySelector('#delete-btn');
+    deleteButton.addEventListener('click', function () {
+        console.log("test");
+
+    });
 });

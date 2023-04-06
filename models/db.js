@@ -40,7 +40,7 @@ const database = {
                 return callback(false);
             }
             return callback(result);
-        });
+        }).lean();
     },
 
     findMany: function(model, query, projection, callback) {

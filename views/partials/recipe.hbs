@@ -1,38 +1,27 @@
-<div class="recipe">
+<a href="/recipe/{{_id}}">
+    <div class="recipe">
 
-    <div id="info" class="info">
-        <div id="food-pic">
-            <img src="images/{{image}}" class="icon">
-        </div>
+        <div id="info" class="info">
+            <div id="food-pic">
+                <img src="images/{{image}}" class="icon">
+            </div>
+            <div id="food-info">
+                <p id="recipename" class="recipename"> recipe name: {{recipename}} </p> 
+                <p id="owner" class="owner"> owner: {{owner}} </p>
+                <p id="minutes" class="minutes"> minutes: {{minutes}} </p>
+                <p id="seconds" class="seconds"> seconds: {{seconds}} </p>
+                <p id="ingredientname"> ingredients:</p>
+                <div id="ingredient-info">
+                    <div id="ingredient">
+                        {{#each ingredients}}
+                            <p id="ingredient-name" class="ingredient-name"> {{ this.item }} : {{ this.amount }}</p>
+                        {{/each}}
+                    </div>
+                    
+                </div>
 
-        <div id="food-info">
-            <p id="recipename" class="recipename"> recipe name: {{recipename}} </p>
-            <p id="owner" class="owner"> owner: {{owner}} </p>
-            <p id="minutes" class="minutes"> minutes: {{minutes}} </p>
-            <p id="seconds" class="seconds"> seconds: {{seconds}} </p>
-            <p id="ingredientname"> ingredients:</p>
-            <div id="ingredient-info">
-                <!--
-                <div id="ingredient">
-                    {{#each ingredients}}
-                        <p id="ingredient-name" class="ingredient-name"> {{ this }} </p>
-                    {{/each}}
-                </div>
-                <div id="ingredient-amount">
-                    {{#each amounts}}
-                        <p id="amount" class="amount"> {{ this }} </p>
-                    {{/each}}
-                </div>
-                -->
-                <div id="ingredient">
-                    {{#each ingredients}}
-                        <p id="ingredient-name" class="ingredient-name"> {{ this.item }} : {{ this.amount }}</p>
-                    {{/each}}
-                </div>
-                
             </div>
 
         </div>
-
     </div>
-</div>
+</a>

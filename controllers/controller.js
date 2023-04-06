@@ -14,7 +14,7 @@ const controller = {
     getHome: function (req, res) {
         var query = { username: req.session.username };
         var query1 = { username: req.session.username};
-        var projection = { _id: 0, __v: 0 };
+        var projection = { __v: 0 };
         try {
 
             db.findOne(User, query, projection, function (result1) {
