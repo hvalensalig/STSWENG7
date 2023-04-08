@@ -132,6 +132,10 @@ describe('Register Input Validator', () => {
             },
 
             flash: jest.fn(),
+
+            session: {
+                save: jest.fn(),
+            }
         };
         
         const res = {

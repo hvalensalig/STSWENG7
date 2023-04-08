@@ -39,7 +39,7 @@ exports.register = async (req, res) => {
         const messages = errors.array().map((item) => item.msg);
         req.flash('error_msg', messages.join("\r"));
         console.log('There is error in the inputs');
-        res.redirect('/register');
+        await req.session.save(res.redirect('/register'));
     }
 };
 
