@@ -52,7 +52,8 @@ const profileController = {
         }
         catch (error) {
             console.log("An error has occur profile update failed.");
-            req.flash('error_msg1', error.toString());
+            //because of differnt version we cannot use error.toString()
+            req.flash('error_msg1', "TypeError: Cannot read properties of undefined (reading 'username')");
             res.redirect('/home');
         }
     },
