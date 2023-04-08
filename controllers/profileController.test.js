@@ -110,7 +110,6 @@ describe('edit profile validator', () => {
         expect(res.redirect.mock.calls).toEqual([['/home']]);
         log.mockClear();
         log.mockRestore();
-        jest.resetAllMocks();
     });
 });
 
