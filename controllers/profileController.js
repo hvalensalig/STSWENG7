@@ -37,6 +37,7 @@ const profileController = {
                     }
                 });
             }
+
             console.log("Profile has been updated.");
             if(decide){
                 req.flash('success_msg1', success);
@@ -50,7 +51,9 @@ const profileController = {
 
         }
         catch (error) {
-            console.log("error", error);
+            console.log("An error has occur profile update failed.");
+            req.flash('error_msg1', error.toString());
+            res.redirect('/home');
         }
     },
     getEditProfile: function (req, res) {
@@ -74,10 +77,11 @@ const profileController = {
             let newImageName;
             if (!req.files || Object.keys(req.files).length === 0) {
                 //console.log("default image uploaded.");
+                console.log("Please input the recipe image")
                 errors.push("Please input the recipe image.");
                 //newImageName = "foodie.jfif";
             } else {
-                console.log("reqbody", req.body);
+                //console.log("reqbody", req.body);
                 imageUploadFile = req.files.recipe_image;
                 newImageName = Date.now() + imageUploadFile.name;
                 uploadPath = require('path').resolve('./') + '/public/images/' + newImageName;
@@ -87,7 +91,7 @@ const profileController = {
             }
             //console.log("reqbody", req.body);
             var ingredients = []
-            console.log("req", req.body.ingredients);
+            //console.log("req", req.body.ingredients);
             if (Array.isArray(req.body.ingredients)) {
                 req.body.ingredients.forEach((val, key) => {
                     ingredients.push({ item: val, amount: req.body.amounts[key] })
@@ -96,7 +100,6 @@ const profileController = {
             else {
                 ingredients.push({ item: req.body.ingredients, amount: req.body.amounts });
             }
-
 
             const recipe = {
                 image: newImageName,
@@ -148,8 +151,8 @@ const profileController = {
             });
 
         } catch (error) {
-            console.log("Please fill up everything.", error);
-            req.flash('error_msg', error);
+            console.log("Please fill up everything.", error.toString());
+            req.flash('error_msg', error.toString());
             res.redirect('/home#addRecipe-container');
         }
 
