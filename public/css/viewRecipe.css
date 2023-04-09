@@ -6,24 +6,24 @@
 }
 
 .viewRecipeInformationBox {
-    background-color: green;
+    /*background-color: green;*/
     display: flex;
 }
 
 .viewRecipeImageBox {
     width: 30%;
-    background-color: yellow;
+    /*background-color: yellow;*/
     padding: 20px;
 }
 
 .viewRecipeImage {
-    background-color: blue;
+    /*background-color: blue;*/
     height: 100%;
 }
 
 .viewRecipeInformation {
     width: 70%;
-    background-color: orange;
+    /*background-color: orange;*/
     padding: 20px;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .viewRecipeIngredients {
-    background-Color: red;
+    /*background-Color: red;*/
 }
 
 .viewRecipeIngredientsValues {
@@ -53,7 +53,7 @@
 }
 
 .viewRecipeDirectionsBox {
-    background-color: gray;
+    /*background-color: gray;*/
     padding: 0px 50px;
 }
 
