@@ -10,7 +10,7 @@ router.get(`/favicon.ico`, controller.getFavicon);
 router.get(`/`, isPublic, controller.getLogin);
 router.get(`/home`, isPrivate, controller.getHome);
 router.get(`/search`, isPrivate, controller.getSearch);
-router.post(`/search`, isPrivate, searchValidation, controller.getSearch);
+router.post(`/search`, isPrivate, searchValidation, controller.searchRecipe);
 router.post('/view', isPrivate, controller.viewRecipe);
 
 router.get(`/addRecipe`, isPrivate, controller.getAddRecipe);
