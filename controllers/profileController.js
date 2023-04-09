@@ -10,30 +10,38 @@ const profileController = {
         let decide = false;
         try {
             const profile = {
-                username: req.body.username,
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
                 location: req.body.location
             }
+            
             if (profile.firstname != "") {
+                if(profile.firstname != req.body.oldfirstname){
+                    decide = true;
+                }
                 db.updateOne(User, { username: req.session.username }, { $set: { firstname: profile.firstname } }, function (flag) {
                     if (flag) {
-                        decide = true;
+                        
                     }
                 });
             }
             if (profile.lastname != "") {
+                if(profile.lastname != req.body.oldlastname){
+                    decide = true;
+                }
                 db.updateOne(User, { username: req.session.username }, { $set: { lastname: profile.lastname } }, function (flag) {
                     if (flag) {
-                        decide = true;
+                        
                     }
                 });
-
             }
             if (profile.location != "") {
+                if(profile.location != req.body.oldlocation){
+                    decide = true;
+                }
                 db.updateOne(User, { username: req.session.username }, { $set: { location: profile.location } }, function (flag) {
                     if (flag) {
-                        decide = true;
+                        
                     }
                 });
             }
