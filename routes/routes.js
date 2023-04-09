@@ -23,5 +23,8 @@ router.get(`/editProfile`, profileController.getEditProfile);
 router.post(`/editProfile`, profileController.postEditProfile);
 
 router.get(`/deleteRecipe`, profileController.deleteRecipe);
-router.get(`/recipe/:id`, profileController.viewRecipe);
+router.get(`/recipe/:id`, profileController.showRecipe);
+
+router.get(`/editRecipe`, profileController.getEditRecipe);
+router.post(`/editRecipe`, profileController.postEditRecipe);
 module.exports = router;

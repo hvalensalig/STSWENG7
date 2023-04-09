@@ -4,11 +4,10 @@
         <div id="info" class="info">
             <a href="/recipe/{{_id}}">
             <div id="food-pic">
-                <img src="images/{{image}}" class="icon">
+                <img src="/images/{{image}}" class="icon">
             </div>
             </a>
             <div id="food-info">
-                <button class="deleteButton" type="button" id="delete-btn">x</button>
                 <div hidden id="recipeid">{{_id}}</div>
                 <p id="recipename" class="recipename"> recipe name: {{recipename}} </p> 
                 <p id="owner" class="owner"> owner: {{owner}} </p>
@@ -21,7 +20,6 @@
                             <p id="ingredient-name" class="ingredient-name"> {{ this.item }} : {{ this.amount }}</p>
                         {{/each}}
                     </div>
-                    
                 </div>
 
             </div>

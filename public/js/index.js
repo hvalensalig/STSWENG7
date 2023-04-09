@@ -27,33 +27,56 @@ document.addEventListener("DOMContentLoaded", function (event) {
         });
     });
 
-    const addButton = document.querySelector('#addButton');
-    const addhtml = "<input class='addIngredientInput' type='text' id='inputIngredient' placeholder='Name'name='ingredients'><input class='addIngredientInput' type='number' id='inputAmount' placeholder='Amount'name='amounts'>";
-    addButton.addEventListener('click', function () {
-        console.log("test");
-        $("#1").append(addhtml);
-    })
+    //add ingredients button
+    try {
+        const addButton = document.querySelector('#addButton');
+        const addhtml = "<input class='addIngredientInput' type='text' id='inputIngredient' placeholder='Name'name='ingredients'><input class='addIngredientInput' type='number' id='inputAmount' placeholder='Amount'name='amounts'>";
+        addButton.addEventListener('click', function () {
+            console.log("test");
+            $("#1").append(addhtml);
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
 
     //x button
-    const xButton = document.querySelector('.close');
-    xButton.addEventListener('click', function(){
-        console.log("test");
-        window.location.href = "http://localhost:3000/home";
-    });
+    try {
+        const xButton = document.querySelector('.close');
+        xButton.addEventListener('click', function () {
+            console.log("test");
+            window.location.href = "http://localhost:3000/home";
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
 
     //edit button
-    const editButton = document.querySelector('#edit-btn');
-    editButton.addEventListener('click', function(){
+    try {
+        const editButton = document.querySelector('#edit-btn');
+        editButton.addEventListener('click', function () {
 
-        console.log("test");
-        window.location.href = '/editProfile';
-    });
+            console.log("test");
+            window.location.href = '/editProfile';
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
 
     //delete recipe
-    const deleteButton = document.querySelector('#delete-btn');
-    deleteButton.addEventListener('click', function () {
+    //let deleteBtn = document.getElementById('#delete-btn');
+    try {
+        const deleteButton = document.querySelector('.deleteButton');
+        deleteButton.addEventListener('click', function () {
 
-        var recipeid = $("#recipeid").text();
-       window.location.href = '/deleteRecipe?id='+ recipeid;
-    });
+            var recipeid = $("#recipeid").text();
+            console.log("hello",recipeid);
+            window.location.href = '/deleteRecipe?id='+ recipeid;
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
 });
