@@ -26,11 +26,13 @@ form.searchRecipe button {
 form.searchRecipe button:hover {
     background: #0b7dda;
 }
+
 /*
 .searchRecipe {
     display: flex;
 }
 */
+
 /* Clear floats */
 form.searchRecipe::after {
     content: "";
