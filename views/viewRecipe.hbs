@@ -1,0 +1,41 @@
+<div id="container">
+    <div id="sidebarContent">
+        {{>sidebar}}
+    </div>
+    <div id="content">
+        <div id="viewRecipeInfo-container">
+            <div class="viewRecipeBox">
+                <div class="viewRecipeInformationBox">
+                    <div class="viewRecipeImageBox">
+                        <div class="viewRecipeImage" id="viewImage" placeholder="View recipe image" name="view_recipe_image">{{view.image}}</div>
+                    </div>
+                    <div class="viewRecipeInformation">
+                        <!-- <p class="viewRecipeStyle" for="recipeName" id="viewRecipeName">Recipe Name: {{view.username}}</p> -->
+                        <p class="viewRecipeStyle" for="recipeName" id="viewRecipeName">Recipe Name: {{view.recipename}}</p>
+                        <p class="viewRecipeStyle" for="owner" id="viewOwner">Owner: {{view.owner}}</p>
+                        <p class="viewRecipeStyle" for="cookingTime" id="viewCookingTime">Cooking Time: {{view.minutes}} : {{view.seconds}}</p>
+                    </div>
+                </div>
+
+                <div class="viewRecipeIngredients">
+                    <p class="viewRecipeStyle" for="ingredients" id="ingredients">Ingredients:</p>
+                    <div class="viewRecipeIngredientsValues">
+                        {{#each view.ingredients}}
+                        <!--<p class="viewIngredients" id="viewIngredients"  name="ingredients">{{this.item}} : {{this.amount}}</p>-->
+                        <div class="viewIngredientsBox">
+                            <p class="viewIngredientsStyle" id="viewIngredientsName"  name="ingredients">{{this.item}}</p>
+                            <p class="viewIngredientsStyle" id="viewIngredientsAmount" name="amount">{{this.amount}}</p>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+
+                <div class="viewRecipeDirectionsBox">
+                    <p class="viewRecipeStyle" for="directions" id="directions">Directions:</p>
+                    <textarea class="viewRecipeDirections" id="viewDirections" type="text" name="view_recipe_directions"
+                        placeholder="Add text..." readonly></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

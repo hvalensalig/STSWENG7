@@ -5,14 +5,35 @@
     <div id="search-content">
         <div id="searchinfo-container">
             <p id="text">Search for a recipe!</p>
-            <form class="searchRecipe" action="/search">
+            <form class="searchRecipe" action="/search", method="Post">
                 <input type="text" placeholder="Search.." name="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
         <div id="recipe-list-container">
+            {{#each preview}}
             <div id="recipe-list">
-
+                <!--{{name}}-->
+                <form action="/view" method="Post">
+                    <button type="submit" class="recipeBox" id="recipeBox">      
+                        <div class="recipeImage">
+                            <!--
+                            <img src="<%= preview.image %>" placeholder="<%= preview.name %>" alt="<%= preview.name %>">
+                            <input type="hidden" value="<%= type %>">
+                            -->
+                        </div>
+                        <div class="recipeBoxText">
+                            <div "recipleBoxGrouping">
+                                <div class="recipeBoxName">Recipe Name: {{recipename}}</div>
+                                <div class="recipeBoxOwner">Owner: {{owner}}</div>
+                            </div>
+                        </div>
+                    </button>
+                    <input value="{{_id}}" name="uniqueID" hidden>
+                    <input value="{{recipename}}" name="recipename" hidden>
+                    <input value="{{owner}}" name="owner" hidden>
+                </form>
             </div>
+            {{/each}}
         </div>
     </div>

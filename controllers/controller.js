@@ -1,5 +1,6 @@
 const db = require('../models/db.js');
 const recipe = require('../models/RecipeModel.js');
+const { validationResult } = require('express-validator');
 
 const controller = {
 
@@ -15,7 +16,52 @@ const controller = {
     },
 
     getSearch: function (req, res) {
-        res.render('search'); 
+        res.render('search');
+    },
+
+    searchRecipe: async function(req, res) {
+        var search = req.body.search
+
+        const errors = validationResult(req)
+
+        if (errors.isEmpty()) {
+            try {
+                var searchPreview = await recipe.find({$text: {$search: search}}).lean()
+            } catch (err) {
+                console.log('Error on finding recipe. Error: \n' + err)
+            }
+
+            console.log(searchPreview.length)
+            if (searchPreview.length > 0) {
+                console.log("Search Exist");
+                res.render('search', {preview: searchPreview});
+            } else {
+                console.log("Search does not Exist");
+                req.flash('search_error', 'Recipe not found!');
+                res.redirect('search');
+            }
+        } else {
+            const messages = errors.array().map((item) => item.msg);
+            req.flash('search_error', messages[0]);
+            console.log("Search input is required")
+            res.redirect('search');
+        }
+    },
+
+    viewRecipe: async function (req, res) {
+        var uniqueID = req.body.uniqueID
+        var recipename = req.body.recipename
+        var owner = req.body.owner
+
+        var viewRecipe = await recipe.findOne({_id: uniqueID, recipename: recipename, owner: owner}).lean();
+
+        if(viewRecipe != null) {
+            console.log("View result is displayed");
+            res.render('viewRecipe', {view: viewRecipe});
+        } else {
+            console.log("View result is gone");
+            res.redirect('search');
+        }
     },
 
     getAddRecipe: function (req, res) {

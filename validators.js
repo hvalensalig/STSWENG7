@@ -20,4 +20,8 @@ const loginValidation = [
     body('password').not().isEmpty().withMessage("Password is required!")
 ];
 
-module.exports = { registerValidation, loginValidation};
+const searchValidation = [
+  body('search').not().isEmpty().withMessage("Search input is required!"),
+];
+
+module.exports = { registerValidation, loginValidation, searchValidation};
