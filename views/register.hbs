@@ -3,6 +3,12 @@
         <div class="regLogBox">
             {{> messages}}
                 <form action="/register" class="registerForm" method="POST" enctype="multipart/form-data">
+                    <p class="registerStyle" for="firstname">First Name:</p>
+                    <input class="registerInput" type="text" id="regFirstname" placeholder="First Name" name="firstname">
+                    <p class="registerStyle" for="lastname">Last Name:</p>
+                    <input class="registerInput" type="text" id="reglastname" placeholder="Last Name" name="lastname">
+                    <p class="registerStyle" for="location">Location:</p>
+                    <input class="registerInput" type="text" id="regLocation" placeholder="Location" name="location">
                     <p class="registerStyle" for="username">Username:</p>
                     <input class="registerInput" type="text" id="regUsername" placeholder="Username" name="username">
                     <p class="registerStyle" for="password">Password:</p>

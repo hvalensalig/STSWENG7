@@ -2,7 +2,7 @@
 
 /* Register/Login Page - Start */
 .regLogPage {
-    background-color: #000000;
+    background-color: #171B88;
     overflow: hidden;
 }
 
@@ -26,7 +26,7 @@
 .registerStyle, .loginStyle {
     color: #000000;
     font-size: 20px;
-    font-family: 'Poppins', sans-serif;
+    font-family: Verdana, sans-serif;
 }
 
 .registerInput, .loginInput {
@@ -35,7 +35,7 @@
     height: 30px;
     width: 80%;
     font-size: 15px;
-    font-family: 'Poppins', sans-serif;
+    font-family: Verdana, sans-serif;
     margin-bottom: 3%;
     padding: 5px;
 }
@@ -46,16 +46,21 @@
     background-color: #FFFFFF;
     font-weight: bold;
     font-size: 15px;
-    font-family: 'Poppins', sans-serif;
+    font-family: Verdana, sans-serif;
     padding: 10px 40px;
     cursor: pointer;
+}
+
+.loginSubmit {
+    background-color: #8388FF;
+    color: white;
 }
 
 .registerSubmit a{
     color: black;
     font-weight: bold;
     font-size: 15px;
-    font-family: 'Poppins', sans-serif;
+    font-family: Verdana, sans-serif;
     cursor: pointer;
 }
 

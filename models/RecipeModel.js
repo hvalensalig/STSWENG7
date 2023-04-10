@@ -19,7 +19,7 @@ const RecipeSchema = new mongoose.Schema({
     },
     image:{
         type: String,
-        required: true
+        required: false
     },
     ingredients: {
         type: Object,
@@ -35,5 +35,5 @@ const RecipeSchema = new mongoose.Schema({
     }
 });
 
-RecipeSchema.index({recipename: 'text'})
+RecipeSchema.index({recipename: 'text'});
 module.exports = mongoose.model('Recipe', RecipeSchema);

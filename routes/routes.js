@@ -1,23 +1,29 @@
 const express = require('express');
-const controller = require('../controllers/controller.js')
-const profileController = require('../controllers/profileController.js')
+const controller = require('../controllers/controller.js');
+const profileController = require('../controllers/profileController.js');
+const { searchValidation } = require('../validators.js');
+const { isPublic, isPrivate } = require('../middlewares/userAuth');
+
 const router = express();
 
 router.get(`/favicon.ico`, controller.getFavicon);
-router.get(`/`, controller.getStart);
-router.get(`/home`, controller.getHome);
-router.get(`/search`, controller.getSearch);
+//router.get(`/`, controller.getStart);
+router.get(`/`, isPublic, controller.getLogin);
+router.get(`/home`, isPrivate, controller.getHome);
+router.get(`/search`, isPrivate, controller.getSearch);
+router.post(`/search`, isPrivate, searchValidation, controller.searchRecipe);
+router.post('/view', isPrivate, controller.viewRecipe);
 
-router.get(`/addRecipe`, controller.getAddRecipe);
-router.post(`/addRecipe`, profileController.postAddRecipe);
+router.get(`/addRecipe`, isPrivate, controller.getAddRecipe);
+router.post(`/addRecipe`, isPrivate, profileController.postAddRecipe);
 
-//router.get(`/register`, controller.getRegister);
+router.get(`/register`, isPublic, controller.getRegister);
 //router.post(`/register`, controller.postRegister);
 
-router.get(`/login`, controller.getLogin);
-router.post(`/login`, controller.postLogin);
+router.get(`/login`, isPublic, controller.getLogin);
+//router.post(`/login`, controller.postLogin);
 
-router.get(`/logout`, controller.getLogout);
+//router.get(`/logout`, controller.getLogout);
 
 router.get(`/editProfile`, profileController.getEditProfile);
 router.post(`/editProfile`, profileController.postEditProfile);
