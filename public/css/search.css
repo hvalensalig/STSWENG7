@@ -11,7 +11,8 @@ form.searchRecipe input[type=text] {
 
 /* Style the submit button */
 form.searchRecipe button {
-    width: 20%;
+    /*width: 20%;*/
+    width: fit-content;
     padding: 10px;
     background: #ffffff;
     color: white;
@@ -27,11 +28,14 @@ form.searchRecipe button:hover {
     background: #0b7dda;
 }
 
-/*
 .searchRecipe {
     display: flex;
+    width: 80%;
 }
-*/
+
+.fa-search {
+    color: black;
+}
 
 /* Clear floats */
 form.searchRecipe::after {
