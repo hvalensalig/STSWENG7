@@ -220,6 +220,25 @@ const profileController = {
         }
     },
 
+    getEditRecipe: function (req, res) {
+        try {
+
+            let recipeId = req.query.idname;
+            console.log("recipeid", recipeId);
+            var query = { _id: recipeId };
+
+            var projection = { __v: 0 };
+
+            db.findOne(Recipe, query, projection, function (result) {
+                console.log(result);
+                res.render('editRecipe', { recipe: result });
+            });
+
+
+        } catch (error) {
+            res.status(500).send("Error Occurred");
+        }
+    },
     postEditRecipe: function (req, res) {
         try {
             const success = "Recipe has been added.";
@@ -337,25 +356,6 @@ const profileController = {
 
 
             res.redirect('/home');
-
-        } catch (error) {
-            res.status(500).send("Error Occurred");
-        }
-    },
-    getEditRecipe: function (req, res) {
-        try {
-
-            let recipeId = req.query.idname;
-            console.log("recipeid", recipeId);
-            var query = { _id: recipeId };
-
-            var projection = { __v: 0 };
-
-            db.findOne(Recipe, query, projection, function (result) {
-                console.log(result);
-                res.render('editRecipe', { recipe: result });
-            });
-
 
         } catch (error) {
             res.status(500).send("Error Occurred");
