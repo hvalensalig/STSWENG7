@@ -55,6 +55,18 @@ body {
     display: block;
 }
 
+.sideLogoContainer {
+    position: absolute;
+    bottom: 80px;
+}
+
+.sideLogo {
+    margin-left: auto;
+    margin-right: auto;
+    height: 80%;
+    width: 80%;
+}
+
 #logout{
     display: block;
     position: absolute;
