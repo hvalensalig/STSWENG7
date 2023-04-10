@@ -19,6 +19,7 @@ exports.register = async (req, res) => {
             console.log('Password not the same')
             res.redirect('/register')
         } else {
+            const name = username;
             const saltRounds = 10;
             bcrypt.hash(password, saltRounds, async (err, hashed) => {
                 const newUser = {
@@ -27,6 +28,7 @@ exports.register = async (req, res) => {
                     location,
                     username,
                     password: hashed,
+                    name,
                 };
                 await user.create(newUser)
                 req.flash('success_msg', 'You are now Registered.');

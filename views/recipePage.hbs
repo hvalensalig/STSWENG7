@@ -1,0 +1,27 @@
+<div class="recipe">
+        <a href="/home">go back</a>
+        <button class="deleteButton" type="button" id="delete-btn">x</button>
+        <form action="/editRecipe"><input name="idname" value="{{recipe._id}}" hidden method="get"><button type="submit">edit</button></form>
+        
+        <div hidden id="recipeid">{{recipe._id}}</div>
+        <div id="info" class="info">
+            <div id="food-pic">
+                <img src="/images/{{recipe.image}}" class="icon">
+            </div>
+            <div id="food-info">
+                <p id="recipename" class="recipename"> recipe name: {{recipe.recipename}} </p> 
+                <p id="owner" class="owner"> owner: {{recipe.owner}} </p>
+                <p id="minutes" class="minutes"> minutes: {{recipe.minutes}} </p>
+                <p id="seconds" class="seconds"> seconds: {{recipe.seconds}} </p>
+                <p id="ingredientname"> ingredients:</p>
+                <div id="ingredient-info">
+                    <div id="ingredient">
+                        {{#each recipe.ingredients}}
+                            <p id="ingredient-name" class="ingredient-name"> {{ this.item }} : {{ this.amount }}</p>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    

@@ -1,0 +1,60 @@
+<div id="container">
+    <div id="sidebarContent">
+        {{>sidebar}}
+    </div>
+    <div id="content">
+        <div id="info-container">
+            <form action="/editRecipe" method="POST" enctype="multipart/form-data">
+                <div>
+                    <p class="addRecipeStyle" for="recipeImage" id="recipeImage">Recipe Image:</p>
+                    <img src="/images/{{recipe.image}}" class="icon">
+                    <input name="recipe_oldimage" value="{{recipe.image}}" hidden>
+                    <input name="recipeId" value="{{recipe._id}}" hidden>
+                    <p id="imageInstructions"> Add New Image: </p>
+                    <input class="addRecipeInput" type="file" id="inputImage" placeholder="Add recipe image"
+                        name="recipe_image" accept="image/*">
+                </div>
+
+                <div id="recipename" class="recipename"> Recipe name: <input class="recipeNameInput" type="text"
+                        id="editRecipeName" value={{recipe.recipename}} name="recipename"></div>
+                <div id="owner" class="owner"> Owner: <input class="ownerInput" type="text" id="editFirstName"
+                        value={{recipe.owner}} name="owner"> </div>
+                <div id="minutes" class="minutes"> minutes: <input class="minutesInput" type="text" id="editMinutes"
+                        value={{recipe.minutes}} name="minutes"> </div>
+                <div id="seconds" class="seconds"> seconds: <input class="secondsInput" type="text" id="editSeconds"
+                        value={{recipe.seconds}} name="seconds"> </div>
+                <div id="ingredient-info">
+                    <p id="ingredientInstruction">
+                        Old Ingredients:
+                    </p>
+                    <div id="ingredient">
+                        {{#each recipe.ingredients}}
+                        <p id="ingredient-name" class="ingredient-name"> {{ this.item }} : {{ this.amount }}</p>
+                        {{/each}}
+                    </div>
+                </div>
+                <div id="1">
+                    <p class="addRecipeStyle" for="ingredients" id="ingredients">Ingredients:</p>
+                    <input class="addIngredientInput" type="text" id="inputIngredient" placeholder="Name"
+                        name="ingredients">
+                    <input class="addIngredientInput" type="number" id="inputAmount" min="0" placeholder="Amount"
+                        name="amounts">
+                    <button class="addButton" type="button" id="addButton">+</button>
+                    <div id="addIngredientContainer">
+                        <!-- CONTAINER FOR ADDING MORE INGREDIENT INPUTS-->
+                    </div>
+                </div>
+
+                <div>
+                    <p class="addRecipeStyle" for="directions" id="directions">Directions:</p>
+
+                    <textarea cols="80" rows="10" id="inputDirections" type="text" name="directions"
+                        placeholder="Add text...">{{recipe.directions}}</textarea>
+
+                </div>
+                <button class="editProfileSubmit" type="submit" id="editProfileSubmit">Confirm Edit</button>
+                {{> messages2}}
+            </form>
+        </div>
+    </div>
+</div>

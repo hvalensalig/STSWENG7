@@ -1,0 +1,23 @@
+<div id="container">
+    <div id="sidebarContent">
+        {{>sidebar}}
+    </div>
+    <div id="content">
+        <div id="info-container">
+            <form action="/editProfile" method="POST" enctype="multipart/form-data">
+                <input name="oldfirstname" value="{{firstname}}" hidden>
+                <input name="oldlastname" value="{{lastname}}" hidden>
+                <input name="oldlocation" value="{{location}}" hidden>
+                <div id="username"> Username: {{username}}</div>
+                <div id="name"> First Name: <input class="nameInput" type="text" id="editFirstName" value={{firstname}}
+                        name="firstname"> </div>
+                <div id="name"> Last Name: <input class="nameInput" type="text" id="editLastName" value={{lastname}}
+                        name="lastname"> </div>
+                <div id="location"> Location: <input class="locationInput" type="text" id="editLocation"
+                        value={{location}} name="location"> </div>
+                <button class="editProfileSubmit" type="submit" id="editProfileSubmit">Confirm Edit</button>
+                {{> messages2}}
+            </form>
+        </div>
+    </div>
+</div>
