@@ -105,7 +105,11 @@ const profileController = {
                 })
             }
             else {
-                ingredients.push({ item: req.body.ingredients, amount: req.body.amounts });
+                console.log("ingred",req.body.ingredients);
+                if(req.body.ingredients != "" && req.body.amounts != ""){
+                    ingredients.push({ item: req.body.ingredients, amount: req.body.amounts });
+                }
+                
             }
 
             const recipe = {
