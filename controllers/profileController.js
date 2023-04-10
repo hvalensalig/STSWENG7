@@ -109,6 +109,9 @@ const profileController = {
                 if(req.body.ingredients != "" && req.body.amounts != ""){
                     ingredients.push({ item: req.body.ingredients, amount: req.body.amounts });
                 }
+                else{
+                    ingredients = null;
+                }
                 
             }
 
@@ -135,7 +138,7 @@ const profileController = {
                 errors.push("Please input the recipe cooking time.");
                 console.log("Please input the recipe cooking time.");
             }
-            if (recipe.ingredients == "") {
+            if (recipe.ingredients === "" || recipe.ingredients === null) {
                 errors.push("Please input the ingredients.");
                 console.log("Please input the ingredients.");
             }
