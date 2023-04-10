@@ -4,6 +4,15 @@ const User = require('../models/users.js');
 const fs = require('fs');
 const profileController = {
 
+    getEditProfile: function (req, res) {
+        var query = { username: req.session.username };
+        var projection = { _id: 0, __v: 0 };
+        db.findOne(User, query, projection, function (result) {
+            if (result != null) {
+                res.render('editProfile', { username: result.username, firstname: result.firstname, lastname: result.lastname, location: result.location });
+            }
+        });
+    },
     postEditProfile: function (req, res) {
         const success = "Profile has been updated.";
         const errors = [];
@@ -61,22 +70,16 @@ const profileController = {
         catch (error) {
             console.log("An error has occur profile update failed.");
             //because of differnt version we cannot use error.toString()
-            req.flash('error_msg1', "TypeError: Cannot read properties of undefined (reading 'username')");
+            //req.flash('error_msg1', "TypeError: Cannot read properties of undefined (reading 'username')");
+            req.flash('error_msg1', error.message);
             res.redirect('/home');
         }
     },
-    getEditProfile: function (req, res) {
-        var query = { username: req.session.username };
-        var projection = { _id: 0, __v: 0 };
-        db.findOne(User, query, projection, function (result) {
-            if (result != null) {
-                res.render('editProfile', { username: result.username, firstname: result.firstname, lastname: result.lastname, location: result.location });
-            }
-        });
-    },
+    /*
     getRecipes: function (req, res) {
 
     },
+    */
     postAddRecipe: function (req, res) {
         const success = "Recipe has been added.";
         const errors = [];
@@ -105,7 +108,7 @@ const profileController = {
                 })
             }
             else {
-                console.log("ingred",req.body.ingredients);
+                //console.log("ingred",req.body.ingredients);
                 if(req.body.ingredients != "" && req.body.amounts != ""){
                     ingredients.push({ item: req.body.ingredients, amount: req.body.amounts });
                 }
@@ -178,8 +181,8 @@ const profileController = {
             }
 
         } catch (error) {
-            console.log("Please fill up everything.", error.toString());
-            req.flash('error_msg', error.toString());
+            console.log("Please fill up everything.", error.message);
+            req.flash('error_msg', error.message);
             res.redirect('/home#addRecipe-container');
         }
 
@@ -195,7 +198,7 @@ const profileController = {
             var projection = { __v: 0 };
             let imageUploadFile;
             let uploadPath;
-            console.log("inside delete");
+            //console.log("inside delete");
             db.findOne(Recipe, query, projection, function (result) {
                 if (result != null) {
                     db.deleteOne(Recipe, query, function (flag) {
@@ -204,7 +207,8 @@ const profileController = {
                         require('fs').unlink(uploadPath, function (err) {
                             if (err) return res.status(500).send(err);
                         })
-
+                        
+                        console.log("Successfully deleted recipe.");
                         res.redirect('home');
                     });
 
@@ -215,7 +219,9 @@ const profileController = {
 
 
         } catch (error) {
+            console.log("An error has occur recipe delete failed.");
             res.status(500).send(error.message);
+            res.redirect('home');
         }
     },
 
@@ -229,12 +235,15 @@ const profileController = {
 
             db.findOne(Recipe, query, projection, function (result) {
                 //console.log(result);
+                console.log("Successfully show recipe.");
                 res.render('recipePage', { recipe: result });
             });
 
 
         } catch (error) {
-            res.status(500).send("Error Occurred");
+            console.log("An error has occur recipe show failed.");
+            res.status(500).send(error.message);
+            res.redirect('home');
         }
     },
 
@@ -248,13 +257,16 @@ const profileController = {
             var projection = { __v: 0 };
 
             db.findOne(Recipe, query, projection, function (result) {
-                console.log(result);
+                //console.log(result);
+                console.log("Successfully show all edit recipe info.");
                 res.render('editRecipe', { recipe: result });
             });
 
 
         } catch (error) {
+            console.log("An error has occur get recipe edit failed.");
             res.status(500).send("Error Occurred");
+            res.redirect('home');
         }
     },
 
