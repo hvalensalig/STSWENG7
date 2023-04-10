@@ -14,34 +14,34 @@ const profileController = {
                 lastname: req.body.lastname,
                 location: req.body.location
             }
-            
+
             if (profile.firstname != "") {
-                if(profile.firstname != req.body.oldfirstname){
+                if (profile.firstname != req.body.oldfirstname) {
                     decide = true;
                 }
                 db.updateOne(User, { username: req.session.username }, { $set: { firstname: profile.firstname } }, function (flag) {
                     if (flag) {
-                        
+
                     }
                 });
             }
             if (profile.lastname != "") {
-                if(profile.lastname != req.body.oldlastname){
+                if (profile.lastname != req.body.oldlastname) {
                     decide = true;
                 }
                 db.updateOne(User, { username: req.session.username }, { $set: { lastname: profile.lastname } }, function (flag) {
                     if (flag) {
-                        
+
                     }
                 });
             }
             if (profile.location != "") {
-                if(profile.location != req.body.oldlocation){
+                if (profile.location != req.body.oldlocation) {
                     decide = true;
                 }
                 db.updateOne(User, { username: req.session.username }, { $set: { location: profile.location } }, function (flag) {
                     if (flag) {
-                        
+
                     }
                 });
             }
@@ -80,12 +80,14 @@ const profileController = {
     postAddRecipe: function (req, res) {
         const success = "Recipe has been added.";
         const errors = [];
+        let noImageFlag = false;
         try {
             let imageUploadFile;
             let uploadPath;
             let newImageName;
             if (!req.files || Object.keys(req.files).length === 0) {
                 //console.log("default image uploaded.");
+                noImageFlag = true;
                 console.log("Please input the recipe image")
                 errors.push("Please input the recipe image.");
                 //newImageName = "foodie.jfif";
@@ -137,27 +139,36 @@ const profileController = {
                 errors.push("Please input the directions.");
                 console.log("Please input the directions.");
             }
+            if (!noImageFlag) {
+                db.insertOne(Recipe, recipe, function (flag) {
+                    const errorMsg = errors.join("\r");
+                    sleep(500);
+                    if (flag) {
 
-            db.insertOne(Recipe, recipe, function (flag) {
+                        uploadPath = require('path').resolve('./') + '/public/images/' + newImageName;
+                        imageUploadFile.mv(uploadPath, function (err) {
+                            if (err) return res.status(500).send(err);
+                        })
+
+
+                        console.log("Recipe has been added.");
+                        req.flash('success_msg', success);
+                        // res.send('home', {successSubmit: success});
+                        res.redirect('/home#addRecipe-container');
+
+                    }
+                    else {
+                        console.log("Please fill up everythingsss.");
+                        req.flash('error_msg', errorMsg);
+                        res.redirect('/home#addRecipe-container');
+                    }
+                });
+            }
+            else {
                 const errorMsg = errors.join("\r");
-                sleep(500);
-                if (flag) {
-                    uploadPath = require('path').resolve('./') + '/public/images/' + newImageName;
-                    imageUploadFile.mv(uploadPath, function (err) {
-                        if (err) return res.status(500).send(err);
-                    })
-                    console.log("Recipe has been added.");
-                    req.flash('success_msg', success);
-                    // res.send('home', {successSubmit: success});
-                    res.redirect('/home#addRecipe-container');
-
-                }
-                else {
-                    console.log("Please fill up everythingsss.");
-                    req.flash('error_msg', errorMsg);
-                    res.redirect('/home#addRecipe-container');
-                }
-            });
+                req.flash('error_msg', errorMsg);
+                res.redirect('/home#addRecipe-container');
+            }
 
         } catch (error) {
             console.log("Please fill up everything.", error.toString());
@@ -239,7 +250,7 @@ const profileController = {
             res.status(500).send("Error Occurred");
         }
     },
-    
+
     postEditRecipe: function (req, res) {
         try {
             const success = "Recipe has been added.";
@@ -248,7 +259,7 @@ const profileController = {
             let imageUploadFileold;
             let uploadPath;
             let newImageName;
-    
+
             if (!req.files || Object.keys(req.files).length === 0) {
                 console.log("im inside image if");
             } else {
@@ -330,7 +341,7 @@ const profileController = {
                     console.log("i am in");
                     db.updateOne(Recipe, query, { $set: { ingredients: recipe.ingredients } }, function (flag) {
                         if (flag) {
-    
+
                         }
                     });
                 }
@@ -340,7 +351,7 @@ const profileController = {
                     console.log("i am inhere");
                     db.updateOne(Recipe, query, { $set: { ingredients: recipe.ingredients } }, function (flag) {
                         if (flag) {
-    
+
                         }
                     });
                 }
