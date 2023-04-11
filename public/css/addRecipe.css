@@ -119,10 +119,12 @@ h5 {
 .button {
 	width: auto;
     display: flex;
-	font-size: 20px;
+	font-size: 25px;
+	/*
     margin: 2px;
     margin-left: 10px;
     padding: 10px;
+	*/
 	color: black;
 	cursor: pointer;
 	transition: all 0.3s ease-out;

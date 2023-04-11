@@ -8,9 +8,9 @@
                 <div class="viewRecipeInformationBox">
                     <div hidden id="recipeid">{{recipe._id}}</div>
                     <div class="viewRecipeImageBox">
-                        <div class="viewRecipeImage" id="viewImage" placeholder="View recipe image"
+                        <div class="viewRecipeImageContainer" id="viewImage" placeholder="View recipe image"
                             name="view_recipe_image">
-                            <img src="/images/{{recipe.image}}">
+                            <img class="viewRecipeImage"src="/images/{{recipe.image}}">
                             <div id="buttons-container">
                                 <button class="deleteButton" type="button" id="delete-btn">delete recipe</button>
                                 <form id="ed-btn" action="/editRecipe"><input name="idname" value="{{recipe._id}}" hidden

@@ -21,7 +21,7 @@
     padding: 2px;
 }
 
-#edit-btn {
+#edit-btn, #addContainer-btn {
     font-size: 25px;
     margin: 2px;
     margin-left: 10px;

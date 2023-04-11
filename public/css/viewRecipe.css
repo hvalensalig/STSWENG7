@@ -13,12 +13,20 @@
 .viewRecipeImageBox {
     width: 30%;
     /*background-color: yellow;*/
+    height: 300px;
     padding: 20px;
 }
 
-.viewRecipeImage {
+.viewRecipeImageContainer {
     /*background-color: blue;*/
     height: 100%;
+}
+
+.viewRecipeImage {
+    height: 100%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .viewRecipeInformation {
