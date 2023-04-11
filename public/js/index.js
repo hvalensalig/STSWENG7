@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         const addhtml = "<input class='addIngredientInput' type='text' id='inputIngredient' placeholder='Name'name='ingredients'><input class='addIngredientInput' type='number' id='inputAmount' placeholder='Amount'name='amounts'>";
         addButton.addEventListener('click', function () {
             console.log("test");
-            $("#1").append(addhtml);
+            $("#rcp").append(addhtml);
         })
 
     } catch (error) {

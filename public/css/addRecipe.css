@@ -189,3 +189,6 @@ h5 {
     display: inline-block;
 }
 
+#rcp{
+	max-width: 500px;
+}
