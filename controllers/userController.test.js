@@ -20,6 +20,10 @@ describe('Register Input Validator', () => {
             },
 
             flash: jest.fn(),
+
+            session: {
+                save: jest.fn(),
+            }
         };
         
         const res = { 
@@ -55,6 +59,10 @@ describe('Register Input Validator', () => {
             },
 
             flash: jest.fn(),
+
+            session: {
+                save: jest.fn(),
+            }
         };
         
         const res = {
@@ -91,6 +99,10 @@ describe('Register Input Validator', () => {
             },
 
             flash: jest.fn(),
+
+            session: {
+                save: jest.fn(),
+            }
         };
         
         const res = {
@@ -132,6 +144,10 @@ describe('Register Input Validator', () => {
             },
 
             flash: jest.fn(),
+
+            session: {
+                save: jest.fn(),
+            }
         };
         
         const res = {
@@ -165,6 +181,10 @@ describe('Login Input Validator', () => {
                 password: "123456789",
             },
             flash: jest.fn(),
+
+            session: {
+                save: jest.fn(),
+            }
         };
         
         const res = {
@@ -199,6 +219,10 @@ describe('Login Input Validator', () => {
             },
 
             flash: jest.fn(),
+
+            session: {
+                save: jest.fn(),
+            }
         };
         
         const res = {
@@ -235,6 +259,10 @@ describe('Login Input Validator', () => {
             },
 
             flash: jest.fn(),
+            
+            session: {
+                save: jest.fn(),
+            }
         };
         
         const res = {
@@ -269,6 +297,10 @@ describe('Login Input Validator', () => {
             },
 
             flash: jest.fn(),
+
+            session: {
+                save: jest.fn(),
+            }
         };
         
         const res = {

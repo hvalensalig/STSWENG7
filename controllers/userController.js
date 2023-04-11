@@ -13,11 +13,13 @@ exports.register = async (req, res) => {
         if (checkUsername) {
             req.flash('error_msg', 'Username is already in use.');
             console.log('Username is already in use');
-            res.redirect('/register');
+            //res.redirect('/register');
+            await req.session.save(res.redirect('/register'));
         } else if (password != rePassword) {
             req.flash('error_msg', 'Password is not the same.');
             console.log('Password not the same')
-            res.redirect('/register')
+            //res.redirect('/register')
+            await req.session.save(res.redirect('/register'));
         } else {
             const name = username;
             const saltRounds = 10;
@@ -33,14 +35,16 @@ exports.register = async (req, res) => {
                 await user.create(newUser)
                 req.flash('success_msg', 'You are now Registered.');
                 console.log('registered')
-                res.redirect('/register')
+                //res.redirect('/register')
+                await req.session.save(res.redirect('/register'));
             });
         }
     } else {
         const messages = errors.array().map((item) => item.msg);
         req.flash('error_msg', messages.join("\r"));
         console.log('There is error in the inputs')
-        res.redirect('/register');
+        //res.redirect('/register');
+        await req.session.save(res.redirect('/register'));
     }
 };
 
@@ -55,10 +59,11 @@ exports.login = async (req, res) => {
         if (checkUser == null) {
             req.flash('error_msg', 'Username does not exist!');
             console.log('Username does not exist');
-            res.redirect('/login');
+            //res.redirect('/login');
+            await req.session.save(res.redirect('/login'));
         } else {
             checkUser.toObject()
-            bcrypt.compare(password, checkUser.password, (err, result) => {
+            bcrypt.compare(password, checkUser.password, async (err, result) => {
                 if (result) {
                     req.session.username = checkUser.username;
                     console.log('Logged In')
@@ -66,7 +71,8 @@ exports.login = async (req, res) => {
                 } else {
                     req.flash('error_msg', 'Incorrect password!');
                     console.log('Wrong password');
-                    res.redirect('/login');
+                    //res.redirect('/login');
+                    await req.session.save(res.redirect('/login'));
                 }
             });
         }
@@ -74,7 +80,8 @@ exports.login = async (req, res) => {
         const messages = errors.array().map((item) => item.msg);
         req.flash('error_msg', messages.join("\r"));
         console.log('There is error in the inputs');
-        res.redirect('/login');
+        //res.redirect('/login');
+        await req.session.save(res.redirect('/login'));
     }
 }
 
