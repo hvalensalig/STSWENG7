@@ -1,27 +1,53 @@
-<div class="recipe">
-        <a href="/home">go back</a>
-        <button class="deleteButton" type="button" id="delete-btn">x</button>
-        <form action="/editRecipe"><input name="idname" value="{{recipe._id}}" hidden method="get"><button type="submit">edit</button></form>
-        
-        <div hidden id="recipeid">{{recipe._id}}</div>
-        <div id="info" class="info">
-            <div id="food-pic">
-                <img src="/images/{{recipe.image}}" class="icon">
-            </div>
-            <div id="food-info">
-                <p id="recipename" class="recipename"> recipe name: {{recipe.recipename}} </p> 
-                <p id="owner" class="owner"> owner: {{recipe.owner}} </p>
-                <p id="minutes" class="minutes"> minutes: {{recipe.minutes}} </p>
-                <p id="seconds" class="seconds"> seconds: {{recipe.seconds}} </p>
-                <p id="ingredientname"> ingredients:</p>
-                <div id="ingredient-info">
-                    <div id="ingredient">
+<div id="container">
+    <div id="sidebarContent">
+        {{>sidebar}}
+    </div>
+    <div id="content">
+        <div id="viewRecipeInfo-container">
+            <div class="viewRecipeBox">
+                <div class="viewRecipeInformationBox">
+                    <div hidden id="recipeid">{{recipe._id}}</div>
+                    <div class="viewRecipeImageBox">
+                        <div class="viewRecipeImage" id="viewImage" placeholder="View recipe image"
+                            name="view_recipe_image">
+                            <img src="/images/{{recipe.image}}">
+                            <div id="buttons-container">
+                                <button class="deleteButton" type="button" id="delete-btn">delete recipe</button>
+                                <form id="ed-btn" action="/editRecipe"><input name="idname" value="{{recipe._id}}" hidden
+                                        method="get"><button id="editrecipe-btn" type="submit">edit recipe</button></form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="viewRecipeInformation">
+                        <!-- <p class="viewRecipeStyle" for="recipeName" id="viewRecipeName">Recipe Name: {{view.username}}</p> -->
+                        <p class="viewRecipeStyle" for="recipeName" id="viewRecipeName">Recipe Name: {{recipe.recipename}}
+                        </p>
+                        <p class="viewRecipeStyle" for="owner" id="viewOwner">Owner: {{recipe.owner}}</p>
+                        <p class="viewRecipeStyle" for="cookingTime" id="viewCookingTime">Cooking Time: {{recipe.minutes}}
+                            : {{recipe.seconds}}</p>
+                    </div>
+                </div>
+
+                <div class="viewRecipeIngredients">
+                    <p class="viewRecipeStyle" for="ingredients" id="ingredients">Ingredients:</p>
+                    <div class="viewRecipeIngredientsValues">
                         {{#each recipe.ingredients}}
-                            <p id="ingredient-name" class="ingredient-name"> {{ this.item }} : {{ this.amount }}</p>
+                        <!--<p class="viewIngredients" id="viewIngredients"  name="ingredients">{{this.item}} : {{this.amount}}</p>-->
+                        <div class="viewIngredientsBox">
+                            <p class="viewIngredientsStyle" id="viewIngredientsName" name="ingredients">{{this.item}}
+                            </p>
+                            <p class="viewIngredientsStyle" id="viewIngredientsAmount" name="amount">{{this.amount}}</p>
+                        </div>
                         {{/each}}
                     </div>
+                </div>
+
+                <div class="viewRecipeDirectionsBox">
+                    <p class="viewRecipeStyle" for="directions" id="directions">Directions:</p>
+                    <textarea class="viewRecipeDirections" id="viewDirections" type="text" name="view_recipe_directions"
+                        placeholder="Add text..." readonly>{{recipe.directions}}</textarea>
                 </div>
             </div>
         </div>
     </div>
-    
+</div>

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 
-#container {
+#container, #home-container, #recipepage-container {
     display: flex;
 }
 
@@ -25,7 +25,11 @@
     font-size: 25px;
     margin: 2px;
     margin-left: 10px;
-    padding: 2px;
+    padding: 10px;
+    cursor: pointer;
+    width: auto;
+    /* float: right; */
+    float: left;
 }
 
 #recipe-list-name {
@@ -34,12 +38,14 @@
     margin-top: 20px;
 }
 
+
 img {
     max-width: 100%;
-    height: auto;
+    height: 300px;
     margin-left: 30px;
+    
 }
-
+/*
 #food-pic {
     width: 200px;
     min-height: 120px;
@@ -62,4 +68,33 @@ img {
 .text {
     font-size: 50px;
     padding-left: 50px;
+} */
+
+#main-container{
+    display:flex;
+    flex-direction: column;
+    margin-left: 20px;
+
 }
+
+#main-container > #recipe-container{
+    display:flex;
+    margin-bottom: 10px;
+}
+
+#recipe-container > #info-container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+#recipe-image{
+    height: 200px;
+    width: 200px;
+}
+
+#info-container > #recipename{
+    font-size: 3rem;
+}
+/* #recipe-list{
+	margin-left: 30px;
+} */

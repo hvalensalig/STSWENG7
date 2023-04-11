@@ -1,28 +1,18 @@
+<div id="main-container">
 
-    <div class="recipe">
+    <div id="recipe-container" class="info">
 
-        <div id="info" class="info">
+        <div id="picture-container">
             <a href="/recipe/{{_id}}">
-            <div id="food-pic">
-                <img src="/images/{{image}}" class="icon">
-            </div>
+                <img id="recipe-image" src="/images/{{image}}" class="icon">
             </a>
-            <div id="food-info">
-                <div hidden id="recipeid">{{_id}}</div>
-                <p id="recipename" class="recipename"> recipe name: {{recipename}} </p> 
-                <p id="owner" class="owner"> owner: {{owner}} </p>
-                <p id="minutes" class="minutes"> minutes: {{minutes}} </p>
-                <p id="seconds" class="seconds"> seconds: {{seconds}} </p>
-                <p id="ingredientname"> ingredients:</p>
-                <div id="ingredient-info">
-                    <div id="ingredient">
-                        {{#each ingredients}}
-                            <p id="ingredient-name" class="ingredient-name"> {{ this.item }} : {{ this.amount }}</p>
-                        {{/each}}
-                    </div>
-                </div>
+        </div>
 
-            </div>
+        <div id="info-container">
+            <div hidden id="recipeid">{{_id}}</div>
+            <p id="recipename" class="recipename"> {{recipename}} </p>
 
         </div>
+
     </div>
+</div>

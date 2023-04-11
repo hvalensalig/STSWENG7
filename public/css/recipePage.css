@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+#buttons-container{
+	display:flex;
+	justify-content: center;
+}
+#delete-btn, #editrecipe-btn, #ed-btn{
+	margin-right: 5px;
+	padding: 0px;
+	font-size: medium;
+	
+}
+#recipe-info-container {
+	justify-content: space-between;
+	height: 250px;
+	display: flex;
+	flex-direction: column;
+	font-size: 50px;
+}
+

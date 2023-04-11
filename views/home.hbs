@@ -1,4 +1,4 @@
-<div id="container">
+<div id="home-container">
     <div id="sidebarContent">
         {{>sidebar}}
     </div>
@@ -7,7 +7,10 @@
             <div id="username"> Username: {{username}}</div>
             <div id="name"> Name: {{name}} </div>
             <div id="location"> Location: {{location}} </div>
-            <button id="edit-btn">Edit Profile Details</button>
+            <div class="box">
+                <button id="edit-btn">Edit Profile Details</button>
+                <button id="addContainer-btn"><a class="button" href="#addRecipe-container">Add recipe</a></button>
+            </div>
             {{>messages1}}
         </div>
         <div id="recipe-list-container">
@@ -15,23 +18,21 @@
             <div id="recipe-list">
 
                 {{#each result2}}
-                    {{#if this}}
-                        {{>recipe}}
-                    {{/if}}
+                {{#if this}}
+                {{>recipe}}
+                {{/if}}
                 {{/each}}
 
             </div>
 
         </div>
-        <div class="box">
-            <a class="button" href="#addRecipe-container">Add recipe</a>
-        </div>
+
         <div class="overlay" id="addRecipe-container">
             <div class="wrapper">
                 <h2>Add a recipe</h2><a class="close" href="#">&times;</a>
                 <div class="content" id="content">
                     <div class="container" id="addRecipeInfo-container">
-                        
+
                         <form action="/addRecipe" class="addRecipeForm" method="Post" enctype="multipart/form-data">
 
                             <div>
@@ -50,20 +51,20 @@
 
                             <div>
                                 <p class="addRecipeStyle" for="cookingTime" id="cookingTime">Cooking Time:</p>
-                                <input class="addRecipeInput" type="number" id="inputMins" min="0" placeholder="min"
+                                <input class="addRecipeInput" type="number" id="inputMins" min="0" max="12" placeholder="min"
                                     name="recipe_minutes">
 
                                 <p class="colon" for="colon" id="colon">:</p>
-                                <input class="addRecipeInput" type="number" id="inputSecs" min="0" max="59" placeholder="sec"
-                                    name="recipe_seconds">
+                                <input class="addRecipeInput" type="number" id="inputSecs" min="0" max="59"
+                                    placeholder="sec" name="recipe_seconds">
                             </div>
 
                             <div id="1">
                                 <p class="addRecipeStyle" for="ingredients" id="ingredients">Ingredients:</p>
                                 <input class="addIngredientInput" type="text" id="inputIngredient" placeholder="Name"
                                     name="ingredients">
-                                <input class="addIngredientInput" type="number" id="inputAmount" min="0" placeholder="Amount"
-                                    name="amounts">
+                                <input class="addIngredientInput" type="number" id="inputAmount" min="0"
+                                    placeholder="Amount" name="amounts">
                                 <button class="addButton" type="button" id="addButton">+</button>
                                 <div id="addIngredientContainer">
                                     <!-- CONTAINER FOR ADDING MORE INGREDIENT INPUTS-->
@@ -78,7 +79,7 @@
 
                             </div>
 
-                            <button class="addRecipeSubmit" type="submit" id="addRecipeSubmit">ADD RECIPE</button>
+                            <button class="addRecipeSubmit" type="submit" id="addRecipeSubmit">Save Recipe</button>
                             {{> messages}}
                         </form>
                     </div>

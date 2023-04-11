@@ -200,7 +200,7 @@ const profileController = {
             let uploadPath;
             //console.log("inside delete");
             db.findOne(Recipe, query, projection, function (result) {
-                if (result != null) {
+                if (result != null && result != false) {
                     db.deleteOne(Recipe, query, function (flag) {
                         imageUploadFile = result.image;
                         uploadPath = require('path').resolve('./') + '/public/images/' + imageUploadFile;
